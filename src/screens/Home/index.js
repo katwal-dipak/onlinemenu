@@ -1,18 +1,29 @@
 import React from 'react';
 
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, FlatList, SafeAreaView, RefreshControl} from 'react-native';
 
-const Home = ({}) => (
-  <View
-    style={{
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'stretch',
-      flex: 1,
-      backgroundColor: '#D8D9D9',
-    }}>
-    <Text>Hello</Text>
-  </View>
-);
+import {PostsData} from './PostsData';
+
+const Home = ({}) => {
+  const keyExtractor = (item, index) => index.toString();
+
+  const RenderItem = ({item}) => {
+    return (
+      <View style={{padding: 10, margin: 10}}>
+        <Text>{item.title}</Text>
+      </View>
+    );
+  };
+
+  return (
+    <FlatList
+      style={{flex: 1}}
+      showsVerticalScrollIndicator={false}
+      data={PostsData}
+      renderItem={RenderItem}
+      keyExtractor={keyExtractor}
+    />
+  );
+};
 
 export default Home;
