@@ -7,8 +7,6 @@ import {
   GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
 
-import {MenuCard} from '../../components';
-
 const Login = ({}) => {
   const signIn = async () => {
     try {
