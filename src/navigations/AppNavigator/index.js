@@ -17,15 +17,15 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="login"
-          component={Login}
-          options={{headerTitle: 'Login'}}
-        />
-
-        <Stack.Screen
           name="main_app"
           component={Home}
           options={{headerTitle: 'Online Menu'}}
+        />
+
+        <Stack.Screen
+          name="login"
+          component={Login}
+          options={{headerTitle: 'Login'}}
         />
 
         <Stack.Screen

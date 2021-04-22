@@ -1,17 +1,28 @@
 import React from 'react';
-
-import {View, Text, FlatList, SafeAreaView, RefreshControl} from 'react-native';
-
-import {PostsData} from './PostsData';
+import {ActivityIndicator, FlatList, RefreshControl, View} from 'react-native';
 import {MenuCard} from '../../components';
+import useFetchTemplates from '../../hooks/useFetchTemplates';
 
 const Home = ({navigation}) => {
+  const {
+    templates,
+    loading,
+    refreshing,
+    paginating,
+    error,
+    onRefresh,
+    onRetry,
+    onEndReached,
+  } = useFetchTemplates();
+
   const keyExtractor = (item, index) => index.toString();
 
   const RenderItem = ({item}) => {
+    const {imageURL} = item || {};
+
     return (
       <MenuCard
-        imageURL={item.imageURL}
+        imageURL={imageURL}
         onPress={() => {
           navigation.navigate('details');
         }}
@@ -19,14 +30,32 @@ const Home = ({navigation}) => {
     );
   };
 
-  return (
+  const RenderFooter = () => {
+    if (paginating) {
+      return <ActivityIndicator color="blue" size="small" animating={true} />;
+    }
+
+    return <View />;
+  };
+
+  return loading ? (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <ActivityIndicator color="blue" size="large" animating={true} />
+    </View>
+  ) : (
     <View style={{flex: 1, backgroundColor: '#FFFFFF', alignItems: 'center'}}>
       <FlatList
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         style={{flex: 1, marginTop: 10}}
         showsVerticalScrollIndicator={false}
-        data={PostsData}
+        data={templates || []}
         renderItem={RenderItem}
         keyExtractor={keyExtractor}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.01}
+        ListFooterComponent={RenderFooter}
       />
     </View>
   );
