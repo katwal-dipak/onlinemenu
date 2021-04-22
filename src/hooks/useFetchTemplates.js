@@ -44,13 +44,13 @@ const useFetchTemplates = () => {
         if (lastVisible) {
           setTemplates([...templates, ...templatesArray]);
         } else {
-          setProducts(templatesArray);
+          setTemplates(templatesArray);
         }
 
         setLastVisible(lastVisibleDoc);
       });
     } catch (error) {
-      //console.log(error);
+      console.log(error);
     }
   };
 
