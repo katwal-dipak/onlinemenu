@@ -2,6 +2,7 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import React, {useEffect} from 'react';
 import 'react-native-gesture-handler';
 import {createStore, combineReducers} from 'redux';
+import {Provider} from 'react-redux';
 
 import AppNavigator from './src/navigations/AppNavigator';
 import userReducer from './src/store/reducers/user';
