@@ -6,7 +6,10 @@ import AppNavigator from './src/navigations/AppNavigator';
 const App = () => {
   useEffect(() => {
     try {
-      GoogleSignin.configure();
+      GoogleSignin.configure({
+        webClientId:
+          '965751423688-oo4fn8mnhanubh9jpjb0pg0i4evkaj0g.apps.googleusercontent.com',
+      });
     } catch (error) {}
   }, []);
 
