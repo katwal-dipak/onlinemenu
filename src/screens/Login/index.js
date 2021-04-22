@@ -1,17 +1,22 @@
-import React from 'react';
-
-import {View} from 'react-native';
+import auth from '@react-native-firebase/auth';
 import {
   GoogleSignin,
-  statusCodes,
   GoogleSigninButton,
+  statusCodes,
 } from '@react-native-google-signin/google-signin';
+import React from 'react';
+import {View} from 'react-native';
 
 const Login = ({}) => {
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
+      const {idToken} = userInfo || {};
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      // Sign-in the user with the credential
+      return auth().signInWithCredential(googleCredential);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
@@ -24,6 +29,7 @@ const Login = ({}) => {
       }
     }
   };
+
   return (
     <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <GoogleSigninButton

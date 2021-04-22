@@ -1,7 +1,16 @@
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import React, {useEffect} from 'react';
 import 'react-native-gesture-handler';
+import {createStore, combineReducers} from 'redux';
+
 import AppNavigator from './src/navigations/AppNavigator';
+import userReducer from './src/store/reducers/user';
+
+const rootReducer = combineReducers({
+  user: userReducer,
+});
+
+let store = createStore(rootReducer);
 
 const App = () => {
   useEffect(() => {
@@ -13,7 +22,11 @@ const App = () => {
     } catch (error) {}
   }, []);
 
-  return <AppNavigator />;
+  return (
+    <Provider store={store}>
+      <AppNavigator />
+    </Provider>
+  );
 };
 
 export default App;
