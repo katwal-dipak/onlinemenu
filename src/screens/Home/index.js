@@ -1,5 +1,12 @@
-import React from 'react';
-import {ActivityIndicator, FlatList, RefreshControl, View} from 'react-native';
+import React, {useLayoutEffect} from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  RefreshControl,
+  View,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import {MenuCard} from '../../components';
 import useFetchTemplates from '../../hooks/useFetchTemplates';
 
@@ -14,6 +21,16 @@ const Home = ({navigation}) => {
     onRetry,
     onEndReached,
   } = useFetchTemplates();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity>
+          <Text>Profile</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, []);
 
   const keyExtractor = (item, index) => index.toString();
 
