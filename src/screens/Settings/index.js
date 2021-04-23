@@ -1,17 +1,10 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Platform,
-  Linking,
-  SafeAreaView,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, Platform, Linking, SafeAreaView} from 'react-native';
 //import Share from 'react-native-share';
 //import DeviceInfo from 'react-native-device-info';
 import {useSelector} from 'react-redux';
 
-import {Divider, StatusBar} from '../../components';
+import {Divider} from '../../components';
 import RowItem from './RowItem';
 import Header from './Header';
 
@@ -24,7 +17,7 @@ const APP_STORE_URL = 'https://apps.apple.com/us/app/sangalo/id1550242573';
 
 const Settings = ({navigation}) => {
   const {firebaseAuthUserObj, userData} = useSelector(state => state.user);
-  const {uid, photoURL, email} = firebaseAuthUserObj || {};
+  const {uid, photoURL, email, displayName} = firebaseAuthUserObj || {};
 
   const onPressProfile = async () => {};
 
@@ -33,7 +26,9 @@ const Settings = ({navigation}) => {
       <Header
         onPress={onPressProfile}
         loggedIn={firebaseAuthUserObj && uid ? true : false}
-        user={{displayName, email}}
+        email={email}
+        name={displayName}
+        photoURL={photoURL}
       />
     );
   };
@@ -119,7 +114,7 @@ const Settings = ({navigation}) => {
     try {
       const appVersion = '1.0.0';
 
-      return <Text style={}>{`Version  ${appVersion}`}</Text>;
+      return <Text>{`Version  ${appVersion}`}</Text>;
     } catch (error) {
       //
     }
@@ -130,12 +125,9 @@ const Settings = ({navigation}) => {
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: Components.Background.core}}>
-      <StatusBar />
       <View
         style={{flex: 1, backgroundColor: Components.Background.tint75Percent}}>
         <Profile />
-        <RenderRows />
-        <RenderAppVersion />
       </View>
     </SafeAreaView>
   );

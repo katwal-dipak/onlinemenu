@@ -25,7 +25,10 @@ const Home = ({navigation}) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('settings');
+          }}>
           <Text>Profile</Text>
         </TouchableOpacity>
       ),

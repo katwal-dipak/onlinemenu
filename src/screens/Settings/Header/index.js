@@ -7,7 +7,7 @@ import {styles} from './styles';
 
 const {titleTextStyle, subTitleTextStyle, containerstyle, avatarStyle} = styles;
 
-const Header = ({loggedIn, email, name, photoURL}) => {
+const Header = ({loggedIn, email, name, photoURL, onPress}) => {
   return (
     <TouchableHighlight underlayColor="transparent" onPress={onPress}>
       <View style={containerstyle}>
