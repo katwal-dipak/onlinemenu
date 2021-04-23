@@ -5,7 +5,7 @@ import {View, Image, TouchableHighlight} from 'react-native';
 import {styles} from './styles';
 import {Components} from '../../styles/colors';
 
-const {containerStyle} = styles;
+const {containerStyle, imageStyle} = styles;
 
 const MenuCard = ({title, imageURL, onPress}) => {
   return (
@@ -13,11 +13,7 @@ const MenuCard = ({title, imageURL, onPress}) => {
       <View style={containerStyle}>
         <Image
           resizeMode="cover"
-          style={{
-            width: '100%',
-            aspectRatio: 1,
-            backgroundColor: Components.Background.tint75Percent,
-          }}
+          style={imageStyle}
           source={{
             uri: imageURL,
             cache: 'force-cache',

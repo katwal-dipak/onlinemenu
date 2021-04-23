@@ -65,7 +65,7 @@ const Home = ({navigation}) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        style={{flex: 1, marginTop: 10}}
+        style={{flex: 1, marginBottom: 10}}
         showsVerticalScrollIndicator={false}
         data={templates || []}
         renderItem={RenderItem}
