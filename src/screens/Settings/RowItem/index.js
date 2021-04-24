@@ -25,7 +25,7 @@ const RowItem = ({label, onPress, showChevronIcon}) => {
           <Ionicons
             name="chevron-forward"
             size={20}
-            color={Components.Text.H3}
+            color={Components.Border}
             style={{marginHorizontal: 10}}
           />
         ) : (

@@ -1,23 +1,26 @@
 import React from 'react';
-import {View, Text, Platform, Linking, SafeAreaView} from 'react-native';
+import {Linking, Platform, SafeAreaView, Text, View} from 'react-native';
+import {PricingCard} from 'react-native-elements';
 //import Share from 'react-native-share';
-//import DeviceInfo from 'react-native-device-info';
 import {useSelector} from 'react-redux';
-
 import {Divider} from '../../components';
-import RowItem from './RowItem';
-import Header from './Header';
-
+import useAuthentication from '../../hooks/useAuthentication';
 import {Components} from '../../styles/colors';
+import {TextStyles} from '../../styles/text';
+import Header from './Header';
+import RowItem from './RowItem';
+import Plans from './Plans';
 
 const GOOGLE_PLAY_URL =
   'https://play.google.com/store/apps/details?id=app.sangalo.android';
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/sangalo/id1550242573';
 
-const Settings = ({navigation}) => {
-  const {firebaseAuthUserObj, userData} = useSelector(state => state.user);
+const Settings = () => {
+  const {firebaseAuthUserObj} = useSelector(state => state.user);
   const {uid, photoURL, email, displayName} = firebaseAuthUserObj || {};
+
+  const {loading, onPressLogin, onPressLogout} = useAuthentication();
 
   const onPressProfile = async () => {};
 
@@ -29,6 +32,8 @@ const Settings = ({navigation}) => {
         email={email}
         name={displayName}
         photoURL={photoURL}
+        onPress={onPressLogin}
+        loading={loading}
       />
     );
   };
@@ -74,27 +79,23 @@ const Settings = ({navigation}) => {
     });
   };
 
+  const RowDivider = () => {
+    return (
+      <View style={{marginHorizontal: 15}}>
+        <Divider />
+      </View>
+    );
+  };
+
   const RenderRows = () => {
     return (
-      <View>
-        <RowItem
-          iconName="receipt"
-          label="My Orders"
-          onPress={() => onPressRowItem('orders')}
-        />
-        <Divider />
-        <RowItem
-          iconName="ios-location"
-          label="Delivery Address"
-          onPress={() => onPressRowItem('settings_address')}
-        />
-        <Divider />
+      <View style={{marginHorizontal: 15}}>
         <RowItem
           iconName="information-circle"
           label="Contact Us"
           onPress={onPressAbout}
         />
-        <Divider />
+        <RowDivider />
         <RowItem
           iconName={
             Platform.OS === 'ios'
@@ -104,8 +105,10 @@ const Settings = ({navigation}) => {
           label="Feedbacks"
           onPress={onPressRateSangalo}
         />
-        <Divider />
+        <RowDivider />
         <RowItem iconName="share" label="Share" onPress={onPressShare} />
+        <RowDivider />
+        <RowItem iconName="share" label="Sign Out" onPress={onPressLogout} />
       </View>
     );
   };
@@ -114,7 +117,13 @@ const Settings = ({navigation}) => {
     try {
       const appVersion = '1.0.0';
 
-      return <Text>{`Version  ${appVersion}`}</Text>;
+      return (
+        <Text
+          style={{
+            ...TextStyles.H2Regular,
+            margin: 15,
+          }}>{`Version  ${appVersion}`}</Text>
+      );
     } catch (error) {
       //
     }
@@ -128,6 +137,9 @@ const Settings = ({navigation}) => {
       <View
         style={{flex: 1, backgroundColor: Components.Background.tint75Percent}}>
         <Profile />
+        <Plans />
+        <RenderRows />
+        <RenderAppVersion />
       </View>
     </SafeAreaView>
   );

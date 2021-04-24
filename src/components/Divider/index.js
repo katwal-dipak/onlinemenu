@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {Components} from '../../styles/colors';
 
 const Divider = () => (
   <View
@@ -8,7 +9,7 @@ const Divider = () => (
       justifyContent: 'center',
       alignItems: 'stretch',
       height: StyleSheet.hairlineWidth,
-      backgroundColor: '#D8D9D9',
+      backgroundColor: Components.Border,
     }}
   />
 );

@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleTextStyle: {
-    ...TextStyles.H1Regular,
+    ...TextStyles.H1SemiBold,
     fontSize: 18,
     marginHorizontal: 10,
   },
