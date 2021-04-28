@@ -1,13 +1,9 @@
 import React, {useLayoutEffect} from 'react';
-import {
-  FlatList,
-  RefreshControl,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, RefreshControl, TouchableOpacity, View} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ActivityIndicator, MenuCard} from '../../components';
 import useFetchTemplates from '../../hooks/useFetchTemplates';
+import {Components} from '../../styles/colors';
 
 const Home = ({navigation}) => {
   const {
@@ -28,7 +24,12 @@ const Home = ({navigation}) => {
           onPress={() => {
             navigation.navigate('settings');
           }}>
-          <Text>Profile</Text>
+          <Ionicons
+            name="person-circle-outline"
+            size={30}
+            color={Components.Button}
+            style={{paddingHorizontal: 10}}
+          />
         </TouchableOpacity>
       ),
     });
