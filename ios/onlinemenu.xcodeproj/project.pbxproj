@@ -18,6 +18,7 @@
 		99004AC9536A4B49A2C95B38 /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2421CEC7FD014F189F30DEDE /* SourceSansPro-Semibold.ttf */; };
 		9B38E4F423B7A7D1341920F7 /* libPods-onlinemenu-onlinemenuTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16175E8DCB361B76BAAC4A43 /* libPods-onlinemenu-onlinemenuTests.a */; };
 		FBCBCE0D26370206007BDC7B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCBCE0C26370206007BDC7B /* File.swift */; };
+		FBFAD0AE2638EA5F0031D6AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBFAD0AD2638EA5F0031D6AE /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FBCBCE0B26370206007BDC7B /* onlinemenu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "onlinemenu-Bridging-Header.h"; sourceTree = "<group>"; };
 		FBCBCE0C26370206007BDC7B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		FBFAD0AD2638EA5F0031D6AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		13B07FAE1A68108700A75B9A /* onlinemenu */ = {
 			isa = PBXGroup;
 			children = (
+				FBFAD0AD2638EA5F0031D6AE /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -302,6 +305,7 @@
 				4B7C9EFED2194CB0B72D9071 /* SourceSansPro-Light.ttf in Resources */,
 				2CBEA9C1F0764A0CB6A1B3A9 /* SourceSansPro-Regular.ttf in Resources */,
 				99004AC9536A4B49A2C95B38 /* SourceSansPro-Semibold.ttf in Resources */,
+				FBFAD0AE2638EA5F0031D6AE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,12 +568,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = app.onlinemenu.ios;
 				PRODUCT_NAME = onlinemenu;
 				SWIFT_OBJC_BRIDGING_HEADER = "onlinemenu-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -590,12 +595,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = app.onlinemenu.ios;
 				PRODUCT_NAME = onlinemenu;
 				SWIFT_OBJC_BRIDGING_HEADER = "onlinemenu-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
