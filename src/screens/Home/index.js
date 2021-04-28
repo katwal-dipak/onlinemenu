@@ -1,14 +1,9 @@
 import React, {useLayoutEffect} from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  RefreshControl,
-  View,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
-import {MenuCard} from '../../components';
+import {FlatList, RefreshControl, TouchableOpacity, View} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {ActivityIndicator, MenuCard} from '../../components';
 import useFetchTemplates from '../../hooks/useFetchTemplates';
+import {Components} from '../../styles/colors';
 
 const Home = ({navigation}) => {
   const {
@@ -29,7 +24,12 @@ const Home = ({navigation}) => {
           onPress={() => {
             navigation.navigate('settings');
           }}>
-          <Text>Profile</Text>
+          <Ionicons
+            name="person-circle-outline"
+            size={30}
+            color={Components.Button}
+            style={{paddingHorizontal: 10}}
+          />
         </TouchableOpacity>
       ),
     });
@@ -52,16 +52,14 @@ const Home = ({navigation}) => {
 
   const RenderFooter = () => {
     if (paginating) {
-      return <ActivityIndicator color="blue" size="small" animating={true} />;
+      return <ActivityIndicator />;
     }
 
     return <View />;
   };
 
   return loading ? (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <ActivityIndicator color="blue" size="large" animating={true} />
-    </View>
+    <ActivityIndicator />
   ) : (
     <View style={{flex: 1, backgroundColor: '#FFFFFF', alignItems: 'center'}}>
       <FlatList
