@@ -18,7 +18,7 @@ const useFetchTemplates = () => {
       // Create a Google credential with the token
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       // Sign-in the user with the credential
-      auth().signInWithCredential(googleCredential);
+      await auth().signInWithCredential(googleCredential);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
@@ -29,7 +29,7 @@ const useFetchTemplates = () => {
       } else {
         // some other error happened
       }
-      console.log(error);
+
       setLoading(false);
     }
 
@@ -37,18 +37,20 @@ const useFetchTemplates = () => {
   };
 
   const onPressLogout = async () => {
+    setLoading(true);
+
     //This is google auth, removes user session from the device.
     try {
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
 
       //This is firebase auth
-      auth()
-        .signOut()
-        .then(() => console.log('User signed out!'));
+      await auth().signOut();
     } catch (error) {
-      console.error(error);
+      setLoading(false);
     }
+
+    setLoading(false);
   };
 
   return {

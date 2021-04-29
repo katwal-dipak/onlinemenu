@@ -1,18 +1,22 @@
 import React from 'react';
-import {View, Text, TouchableHighlight} from 'react-native';
-import PropTypes from 'prop-types';
+import {Text, TouchableHighlight, View} from 'react-native';
 import {Avatar} from 'react-native-elements';
-
+import {useSelector} from 'react-redux';
 import {Button} from '../../../components';
-
+import useAuthentication from '../../../hooks/useAuthentication';
 import {styles} from './styles';
 
 const {titleTextStyle, subTitleTextStyle, containerstyle, avatarStyle} = styles;
 
-const Header = ({loggedIn, email, name, photoURL, onPress, loading}) => {
+const Header = () => {
+  const {firebaseAuthUserObj} = useSelector(state => state.user);
+  const {uid, photoURL, email, displayName} = firebaseAuthUserObj || {};
+
+  const {loading, onPressLogin} = useAuthentication();
+
   return (
-    <TouchableHighlight underlayColor="transparent" onPress={onPress}>
-      {loggedIn ? (
+    <TouchableHighlight underlayColor="transparent">
+      {uid ? (
         <View style={containerstyle}>
           <Avatar
             rounded
@@ -21,7 +25,7 @@ const Header = ({loggedIn, email, name, photoURL, onPress, loading}) => {
             containerStyle={avatarStyle}
           />
           <View>
-            <Text style={titleTextStyle}>{name}</Text>
+            <Text style={titleTextStyle}>{displayName}</Text>
             <Text numberOfLines={2} style={subTitleTextStyle}>
               {email}
             </Text>
@@ -31,24 +35,13 @@ const Header = ({loggedIn, email, name, photoURL, onPress, loading}) => {
         <Button
           type="outline"
           label="LOGIN WITH GOOGLE"
-          onPress={onPress}
+          onPress={onPressLogin}
           containerStyle={{padding: 15, backgroundColor: '#FFFFFF'}}
+          loading={loading}
         />
       )}
     </TouchableHighlight>
   );
-};
-
-Header.propTypes = {
-  onPress: PropTypes.func,
-  user: PropTypes.object,
-  loggedIn: PropTypes.bool,
-};
-
-Header.defaultProps = {
-  onPress: () => {},
-  user: {},
-  loggedIn: false,
 };
 
 export default Header;
