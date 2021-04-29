@@ -90,6 +90,10 @@ const Settings = () => {
   const RenderRows = () => {
     return (
       <View style={{margin: 0}}>
+        <RowItem label="Manage Profile" onPress={onPressRateSangalo} />
+        <RowDivider />
+        <RowItem label="Manage Menu" onPress={onPressRateSangalo} />
+        <RowDivider />
         <RowItem
           iconName="Manage Subscription"
           label="Manage Subscription"
@@ -103,8 +107,6 @@ const Settings = () => {
           onPress={onPressShare}
         />
         <RowDivider />
-        <RowItem iconName="share" label="Sign Out" onPress={onPressLogout} />
-        <RowDivider />
         <RowItem
           iconName={
             Platform.OS === 'ios'
@@ -114,6 +116,8 @@ const Settings = () => {
           label="Feedbacks"
           onPress={onPressRateSangalo}
         />
+        <RowDivider />
+        <RowItem iconName="share" label="Sign Out" onPress={onPressLogout} />
       </View>
     );
   };
