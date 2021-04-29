@@ -2,7 +2,8 @@ import React from 'react';
 import {View, Text, TouchableHighlight} from 'react-native';
 import PropTypes from 'prop-types';
 import {Avatar} from 'react-native-elements';
-import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
+
+import {Button} from '../../../components';
 
 import {styles} from './styles';
 
@@ -27,12 +28,11 @@ const Header = ({loggedIn, email, name, photoURL, onPress, loading}) => {
           </View>
         </View>
       ) : (
-        <GoogleSigninButton
-          style={{width: 250, height: 80}}
-          size={GoogleSigninButton.Size.Wide}
-          color={GoogleSigninButton.Color.Dark}
+        <Button
+          type="outline"
+          label="LOGIN WITH GOOGLE"
           onPress={onPress}
-          disabled={loading ? true : false}
+          containerStyle={{padding: 15, backgroundColor: '#FFFFFF'}}
         />
       )}
     </TouchableHighlight>

@@ -3,7 +3,7 @@ import {Linking, Platform, SafeAreaView, Text, View} from 'react-native';
 import {PricingCard} from 'react-native-elements';
 //import Share from 'react-native-share';
 import {useSelector} from 'react-redux';
-import {Divider} from '../../components';
+import {Divider, Button} from '../../components';
 import useAuthentication from '../../hooks/useAuthentication';
 import {Components} from '../../styles/colors';
 import {TextStyles} from '../../styles/text';
