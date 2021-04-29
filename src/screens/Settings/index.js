@@ -69,8 +69,8 @@ const Settings = () => {
     });
   };
 
-  const onPressAbout = () => {
-    const URL = 'https://sangalocosmetics.com/';
+  const onPressManageSubscription = () => {
+    const URL = 'https://onlinemenu.today/';
 
     Linking.canOpenURL(URL).then(supported => {
       if (supported) {
@@ -89,12 +89,21 @@ const Settings = () => {
 
   const RenderRows = () => {
     return (
-      <View style={{marginHorizontal: 15}}>
+      <View style={{margin: 0}}>
         <RowItem
-          iconName="information-circle"
-          label="Contact Us"
-          onPress={onPressAbout}
+          iconName="Manage Subscription"
+          label="Manage Subscription"
+          onPress={onPressManageSubscription}
         />
+
+        <RowDivider />
+        <RowItem
+          iconName="share"
+          label="Share With Friends"
+          onPress={onPressShare}
+        />
+        <RowDivider />
+        <RowItem iconName="share" label="Sign Out" onPress={onPressLogout} />
         <RowDivider />
         <RowItem
           iconName={
@@ -105,10 +114,6 @@ const Settings = () => {
           label="Feedbacks"
           onPress={onPressRateSangalo}
         />
-        <RowDivider />
-        <RowItem iconName="share" label="Share" onPress={onPressShare} />
-        <RowDivider />
-        <RowItem iconName="share" label="Sign Out" onPress={onPressLogout} />
       </View>
     );
   };
@@ -137,9 +142,9 @@ const Settings = () => {
       <View
         style={{flex: 1, backgroundColor: Components.Background.tint75Percent}}>
         <Profile />
-        <Plans />
         <RenderRows />
         <RenderAppVersion />
+        <Plans />
       </View>
     </SafeAreaView>
   );
