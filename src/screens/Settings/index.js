@@ -32,6 +32,7 @@ const Settings = ({navigation}) => {
         photoURL={photoURL}
         onPress={onPressLogin}
         loading={loading}
+        navigation={navigation}
       />
     );
   };

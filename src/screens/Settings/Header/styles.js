@@ -6,9 +6,10 @@ import {TextStyles} from '../../../styles/text';
 export const styles = StyleSheet.create({
   containerstyle: {
     backgroundColor: Components.Background.core,
-    padding: 10,
+    paddingLeft: 10,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   titleTextStyle: {
     ...TextStyles.H1SemiBold,

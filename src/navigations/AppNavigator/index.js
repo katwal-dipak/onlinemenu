@@ -7,6 +7,7 @@ import Home from '../../screens/Home';
 import Login from '../../screens/Login';
 import Pricing from '../../screens/Pricing';
 import Settings from '../../screens/Settings';
+import Profile from '../../screens/Profile';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +45,12 @@ const AppNavigator = () => {
           name="pricing"
           component={Pricing}
           options={{headerTitle: 'Pricing'}}
+        />
+
+        <Stack.Screen
+          name="profile"
+          component={Profile}
+          options={{headerTitle: 'Profile'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
