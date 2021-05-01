@@ -44,7 +44,7 @@ const Home = ({navigation}) => {
       <MenuCard
         imageURL={imageURL}
         onPress={() => {
-          navigation.navigate('details');
+          navigation.navigate('details', {item});
         }}
       />
     );

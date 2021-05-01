@@ -38,7 +38,11 @@ const AppNavigator = () => {
         <Stack.Screen
           name="details"
           component={Details}
-          options={{headerTitle: 'Details'}}
+          options={{
+            headerTitle: 'Details',
+            headerBackTitle: '',
+            headerTitleStyle: styles.titleTextStyle,
+          }}
         />
 
         <Stack.Screen
