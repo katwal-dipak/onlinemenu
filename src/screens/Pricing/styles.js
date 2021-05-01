@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Components.Background.core,
   },
-  cardStyle: {},
   titleTextStyle: {
     ...TextStyles.H1SemiBold,
     paddingHorizontal: 10,
