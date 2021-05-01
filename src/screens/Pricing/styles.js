@@ -1,17 +1,11 @@
 import {StyleSheet} from 'react-native';
 
-import {TextStyles} from '../../../styles/text';
-import {DEVICE} from '../../../constants';
-
-const CARD_WIDTH = DEVICE.width / 1.5;
+import {Components} from '../../styles/colors';
 
 export const styles = StyleSheet.create({
-  titleTextStyle: {
-    ...TextStyles.H1SemiBold,
-    marginHorizontal: 20,
+  containerStyle: {
+    flex: 1,
+    backgroundColor: Components.Background.core,
   },
-  cardStyle: {
-    width: CARD_WIDTH,
-    height: CARD_WIDTH * 0.8,
-  },
+  cardStyle: {},
 });

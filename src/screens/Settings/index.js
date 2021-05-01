@@ -1,22 +1,20 @@
 import React from 'react';
 import {Linking, Platform, SafeAreaView, Text, View} from 'react-native';
-import {PricingCard} from 'react-native-elements';
-//import Share from 'react-native-share';
+
 import {useSelector} from 'react-redux';
-import {Divider, Button} from '../../components';
+import {Divider} from '../../components';
 import useAuthentication from '../../hooks/useAuthentication';
 import {Components} from '../../styles/colors';
 import {TextStyles} from '../../styles/text';
 import Header from './Header';
 import RowItem from './RowItem';
-import Plans from './Plans';
 
 const GOOGLE_PLAY_URL =
   'https://play.google.com/store/apps/details?id=app.sangalo.android';
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/sangalo/id1550242573';
 
-const Settings = () => {
+const Settings = ({navigation}) => {
   const {firebaseAuthUserObj} = useSelector(state => state.user);
   const {uid, photoURL, email, displayName} = firebaseAuthUserObj || {};
 
@@ -70,13 +68,15 @@ const Settings = () => {
   };
 
   const onPressManageSubscription = () => {
-    const URL = 'https://onlinemenu.today/';
+    /*const URL = 'https://onlinemenu.today/';
 
     Linking.canOpenURL(URL).then(supported => {
       if (supported) {
         Linking.openURL(URL);
       }
-    });
+    });*/
+
+    navigation.navigate('pricing');
   };
 
   const RowDivider = () => {
@@ -94,30 +94,14 @@ const Settings = () => {
         <RowDivider />
         <RowItem label="Manage Menu" onPress={onPressRateSangalo} />
         <RowDivider />
-        <RowItem
-          iconName="Manage Subscription"
-          label="Manage Subscription"
-          onPress={onPressManageSubscription}
-        />
+        <RowItem label="Subscription" onPress={onPressManageSubscription} />
 
         <RowDivider />
-        <RowItem
-          iconName="share"
-          label="Share With Friends"
-          onPress={onPressShare}
-        />
+        <RowItem label="Share With Friends" onPress={onPressShare} />
         <RowDivider />
-        <RowItem
-          iconName={
-            Platform.OS === 'ios'
-              ? 'logo-apple-appstore'
-              : 'logo-google-playstore'
-          }
-          label="Feedbacks"
-          onPress={onPressRateSangalo}
-        />
+        <RowItem label="Feedbacks" onPress={onPressRateSangalo} />
         <RowDivider />
-        <RowItem iconName="share" label="Sign Out" onPress={onPressLogout} />
+        <RowItem label="Sign Out" onPress={onPressLogout} />
       </View>
     );
   };
@@ -148,7 +132,6 @@ const Settings = () => {
         <Profile />
         <RenderRows />
         <RenderAppVersion />
-        <Plans />
       </View>
     </SafeAreaView>
   );
