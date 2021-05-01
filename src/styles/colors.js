@@ -24,7 +24,7 @@ export const Colors = {
 };
 
 export const Components = {
-  Button: Theme.PrimaryColor,
+  Button: Colors.Black.tint75Percent,
   Text: {
     H1: Colors.Black.tint75Percent,
     H2: Colors.Black.tint50Percent,

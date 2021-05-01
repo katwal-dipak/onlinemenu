@@ -1,20 +1,13 @@
-import React, {useRef} from 'react';
-import QRCode from 'react-native-qrcode-svg';
-import RNFS from 'react-native-fs';
-
-import {
-  View,
-  Text,
-  Platform,
-  TouchableOpacity,
-  ToastAndroid,
-  PermissionsAndroid,
-} from 'react-native';
 import CameraRoll from '@react-native-community/cameraroll';
+import React, {useRef} from 'react';
+import {PermissionsAndroid, Platform, ToastAndroid, View} from 'react-native';
+import RNFS from 'react-native-fs';
+import {MenuCard, Button} from '../../components';
 
-import {MenuCard} from '../../components';
+const Home = ({route}) => {
+  const {item} = route.params || {};
+  const {imageURL} = item || {};
 
-const Home = ({}) => {
   let myQRCode = useRef();
 
   const saveQrToDisk = async () => {
@@ -47,19 +40,24 @@ const Home = ({}) => {
 
   return (
     <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
-      <QRCode
-        getRef={ref => (myQRCode = ref)}
-        value="https://sangalocosmetics.com/"
-        size={300}
-      />
+      <View style={{alignSelf: 'center'}}>
+        <MenuCard imageURL={imageURL} />
+      </View>
 
-      <TouchableOpacity
-        onPress={saveQrToDisk}
-        style={{backgroundColor: 'yellow'}}>
-        <Text style={{padding: 15}}>Share</Text>
-      </TouchableOpacity>
+      <Button
+        type="outline"
+        label="Preview"
+        containerStyle={{marginHorizontal: 100, marginTop: 15}}
+      />
     </View>
   );
 };
 
 export default Home;
+/**
+ *     <QRCode
+        getRef={ref => (myQRCode = ref)}
+        value="https://sangalocosmetics.com/"
+        size={300}
+      />
+ */

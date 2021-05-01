@@ -4,6 +4,7 @@ import {Avatar} from 'react-native-elements';
 import {useSelector} from 'react-redux';
 import {Button} from '../../../components';
 import useAuthentication from '../../../hooks/useAuthentication';
+
 import {styles} from './styles';
 
 const {titleTextStyle, subTitleTextStyle, containerstyle, avatarStyle} = styles;
@@ -15,7 +16,7 @@ const Header = () => {
   const {loading, onPressLogin} = useAuthentication();
 
   return (
-    <TouchableHighlight underlayColor="transparent">
+    <View>
       {uid ? (
         <View style={containerstyle}>
           <Avatar
@@ -40,7 +41,7 @@ const Header = () => {
           loading={loading}
         />
       )}
-    </TouchableHighlight>
+    </View>
   );
 };
 
