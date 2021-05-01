@@ -1,11 +1,31 @@
-import React from 'react';
-import {ScrollView, View} from 'react-native';
+import React, {useLayoutEffect} from 'react';
+import {ScrollView, View, TouchableOpacity, Text, Linking} from 'react-native';
 import {PricingCard} from 'react-native-elements';
 import {styles} from './styles';
 
-const {containerStyle, cardStyle} = styles;
+const {containerStyle, cardStyle, titleTextStyle} = styles;
 
-const Pricing = () => {
+const Pricing = ({navigation}) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={onPressManageSubscription}>
+          <Text style={titleTextStyle}>MANAGE</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, []);
+
+  const onPressManageSubscription = () => {
+    const URL = 'https://onlinemenu.today/';
+
+    Linking.canOpenURL(URL).then(supported => {
+      if (supported) {
+        Linking.openURL(URL);
+      }
+    });
+  };
+
   return (
     <ScrollView
       style={containerStyle}
