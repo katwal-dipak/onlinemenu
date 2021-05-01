@@ -38,6 +38,7 @@ const Pricing = ({navigation}) => {
         info={['1 Week', 'All Templates']}
         button={{title: 'GET STARTED'}}
         containerStyle={{borderColor: '#53AEDD'}}
+        // onButtonPress={onPressManageSubscription}
       />
 
       <PricingCard
@@ -47,6 +48,7 @@ const Pricing = ({navigation}) => {
         info={['Per Month', 'Basic Templates']}
         button={{title: 'SELECT PLAN'}}
         containerStyle={{borderColor: '#B595E7'}}
+        onButtonPress={onPressManageSubscription}
       />
 
       <PricingCard
@@ -56,6 +58,7 @@ const Pricing = ({navigation}) => {
         info={['Per Month', 'Premium Templates']}
         button={{title: 'SELECT PLAN'}}
         containerStyle={{borderColor: '#E7AC44'}}
+        onButtonPress={onPressManageSubscription}
       />
     </ScrollView>
   );
