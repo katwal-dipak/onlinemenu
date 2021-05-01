@@ -1,11 +1,22 @@
 import CameraRoll from '@react-native-community/cameraroll';
 import React, {useRef} from 'react';
-import {PermissionsAndroid, Platform, ToastAndroid, View} from 'react-native';
+import {
+  PermissionsAndroid,
+  Platform,
+  ToastAndroid,
+  View,
+  Modal,
+  Image,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import RNFS from 'react-native-fs';
-import {MenuCard, Button} from '../../components';
+import {Button} from '../../components';
 
-const Home = ({route}) => {
-  const {item} = route.params || {};
+import styles from './styles';
+
+const {container, cardContainer, imageStyle} = styles;
+
+const Details = ({item, visible, toggle}) => {
   const {imageURL} = item || {};
 
   let myQRCode = useRef();
@@ -39,21 +50,34 @@ const Home = ({route}) => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
-      <View style={{alignSelf: 'center'}}>
-        <MenuCard imageURL={imageURL} />
+    <Modal
+      visible={visible}
+      animationType="fade"
+      onRequestClose={toggle}
+      transparent>
+      <View style={container} onPress={toggle}>
+        <View style={cardContainer}>
+          <Image
+            resizeMode="cover"
+            style={imageStyle}
+            source={{
+              uri: imageURL,
+              cache: 'force-cache',
+            }}
+          />
+          <Button
+            type="outline"
+            label="Preview"
+            containerStyle={{marginHorizontal: 100, marginTop: 15}}
+            onPress={toggle}
+          />
+        </View>
       </View>
-
-      <Button
-        type="outline"
-        label="Preview"
-        containerStyle={{marginHorizontal: 100, marginTop: 15}}
-      />
-    </View>
+    </Modal>
   );
 };
 
-export default Home;
+export default Details;
 /**
  *     <QRCode
         getRef={ref => (myQRCode = ref)}

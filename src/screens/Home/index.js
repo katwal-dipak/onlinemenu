@@ -1,11 +1,16 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {FlatList, RefreshControl, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ActivityIndicator, MenuCard} from '../../components';
 import useFetchTemplates from '../../hooks/useFetchTemplates';
 import {Components} from '../../styles/colors';
 
+import Details from '../Details';
+
 const Home = ({navigation}) => {
+  const [isDetailsVisible, setDetailsVisibility] = useState(false);
+  const [selectedItem, setSelectedItem] = useState();
+
   const {
     templates,
     loading,
@@ -35,6 +40,10 @@ const Home = ({navigation}) => {
     });
   }, []);
 
+  const toggleDetailsView = () => {
+    setDetailsVisibility(!isDetailsVisible);
+  };
+
   const keyExtractor = (item, index) => index.toString();
 
   const RenderItem = ({item}) => {
@@ -44,7 +53,7 @@ const Home = ({navigation}) => {
       <MenuCard
         imageURL={imageURL}
         onPress={() => {
-          navigation.navigate('details', {item});
+          toggleDetailsView(), setSelectedItem(item);
         }}
       />
     );
@@ -74,6 +83,11 @@ const Home = ({navigation}) => {
         onEndReached={onEndReached}
         onEndReachedThreshold={0.01}
         ListFooterComponent={RenderFooter}
+      />
+      <Details
+        item={selectedItem}
+        visible={isDetailsVisible}
+        toggle={toggleDetailsView}
       />
     </View>
   );
