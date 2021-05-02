@@ -66,6 +66,16 @@ const Details = ({item, visible, toggle}) => {
     });
   };
 
+  const onPressUpgradePlan = () => {
+    const URL = 'https://onlinemenu.today';
+
+    Linking.canOpenURL(URL).then(supported => {
+      if (supported) {
+        Linking.openURL(URL);
+      }
+    });
+  };
+
   return (
     <Modal
       visible={visible}
@@ -87,7 +97,7 @@ const Details = ({item, visible, toggle}) => {
             <Button
               label="UPGRADE PLAN TO APPLY"
               containerStyle={{paddingHorizontal: 15, flex: 1}}
-              onPress={toggle}
+              onPress={onPressUpgradePlan}
             />
             <View style={{alignItems: 'center', paddingHorizontal: 15}}>
               <Ionicons
@@ -97,6 +107,9 @@ const Details = ({item, visible, toggle}) => {
               />
               <Text style={previewTextStyle}>Preview</Text>
             </View>
+          </View>
+          <View style={{position: 'absolute', top: 5, right: 5}}>
+            <Ionicons name="ios-close-circle" size={35} onPress={toggle} />
           </View>
         </View>
       </View>
