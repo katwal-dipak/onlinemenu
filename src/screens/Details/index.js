@@ -1,11 +1,29 @@
 import CameraRoll from '@react-native-community/cameraroll';
 import React, {useRef} from 'react';
-import {PermissionsAndroid, Platform, ToastAndroid, View} from 'react-native';
+import {
+  Image,
+  Modal,
+  PermissionsAndroid,
+  Platform,
+  ToastAndroid,
+  View,
+  Text,
+  Linking,
+} from 'react-native';
 import RNFS from 'react-native-fs';
-import {MenuCard, Button} from '../../components';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Button} from '../../components';
+import styles from './styles';
 
-const Home = ({route}) => {
-  const {item} = route.params || {};
+const {
+  container,
+  cardContainer,
+  imageStyle,
+  titleTextStyle,
+  previewTextStyle,
+} = styles;
+
+const Details = ({item, visible, toggle}) => {
   const {imageURL} = item || {};
 
   let myQRCode = useRef();
@@ -38,22 +56,72 @@ const Home = ({route}) => {
     return status === 'granted';
   };
 
-  return (
-    <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
-      <View style={{alignSelf: 'center'}}>
-        <MenuCard imageURL={imageURL} />
-      </View>
+  const onPressPreview = () => {
+    const URL = 'https://onlinemenu.today/template2';
 
-      <Button
-        type="outline"
-        label="Preview"
-        containerStyle={{marginHorizontal: 100, marginTop: 15}}
-      />
-    </View>
+    Linking.canOpenURL(URL).then(supported => {
+      if (supported) {
+        Linking.openURL(URL);
+      }
+    });
+  };
+
+  const onPressUpgradePlan = () => {
+    const URL = 'https://onlinemenu.today';
+
+    Linking.canOpenURL(URL).then(supported => {
+      if (supported) {
+        Linking.openURL(URL);
+      }
+    });
+  };
+
+  return (
+    <Modal
+      visible={visible}
+      animationType="fade"
+      onRequestClose={toggle}
+      transparent>
+      <View style={container} onPress={toggle}>
+        <View style={cardContainer}>
+          <Image
+            resizeMode="cover"
+            style={imageStyle}
+            source={{
+              uri: imageURL,
+              cache: 'force-cache',
+            }}
+          />
+          <View
+            style={{flexDirection: 'row', alignItems: 'baseline', padding: 15}}>
+            <Text style={titleTextStyle}>$ 0.99</Text>
+            <Text style={previewTextStyle}>Per Month</Text>
+          </View>
+          <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
+            <Button
+              label="UPGRADE PLAN TO APPLY"
+              containerStyle={{paddingHorizontal: 15, flex: 1}}
+              onPress={onPressUpgradePlan}
+            />
+            <View style={{alignItems: 'center', paddingHorizontal: 15}}>
+              <Ionicons
+                name="expand-outline"
+                size={30}
+                onPress={onPressPreview}
+              />
+              <Text style={previewTextStyle}>Preview</Text>
+            </View>
+          </View>
+          <View style={{position: 'absolute', top: 5, right: 5}}>
+            <Ionicons name="ios-close-circle" size={35} onPress={toggle} />
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 };
 
-export default Home;
+export default Details;
 /**
  *     <QRCode
         getRef={ref => (myQRCode = ref)}
