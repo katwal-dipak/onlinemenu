@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 import {Components} from '../../styles/colors';
+import {TextStyles} from '../../styles/text';
 
 export const styles = StyleSheet.create({
   containerStyle: {
@@ -13,5 +14,10 @@ export const styles = StyleSheet.create({
     paddingTop: 15,
     borderTopColor: Components.Border,
     borderTopWidth: 1,
+  },
+  titleTextStyle: {
+    ...TextStyles.H1SemiBold,
+    marginTop: 30,
+    fontSize: 20,
   },
 });
