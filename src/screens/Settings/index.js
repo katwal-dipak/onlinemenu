@@ -91,7 +91,12 @@ const Settings = ({navigation}) => {
   const RenderRows = () => {
     return (
       <View style={{margin: 0}}>
-        <RowItem label="Manage Profile" onPress={onPressRateSangalo} />
+        <RowItem
+          label="Manage Profile"
+          onPress={() => {
+            navigation.navigate('profile');
+          }}
+        />
         <RowDivider />
         <RowItem label="Manage Menu" onPress={onPressRateSangalo} />
         <RowDivider />
