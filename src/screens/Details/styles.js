@@ -19,19 +19,15 @@ export default StyleSheet.create({
     height: CARD_HEIGHT,
     backgroundColor: 'white',
     flexDirection: 'column',
-    // justifyContent: 'space-between',
-    //  alignItems: 'stretch',
-    //  padding: 15,
     borderRadius: 5,
   },
   titleTextStyle: {
-    ...TextStyles.H1SemiBold,
-    fontSize: 25,
-    textAlign: 'center',
+    ...TextStyles.H1Regular,
+    fontSize: 20,
+    padding: 15,
   },
-  messageTextStyle: {
-    ...TextStyles.H1SemiBold,
-    textAlign: 'center',
+  previewTextStyle: {
+    ...TextStyles.H2Regular,
   },
   imageStyle: {
     width: '100%',

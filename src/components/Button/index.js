@@ -1,11 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {View} from 'react-native';
+import React from 'react';
 import {Button as RNEButton} from 'react-native-elements';
-
-import {styles} from './styles';
-import {TextStyles} from '../../styles/text';
 import {Theme} from '../../styles/colors';
+import {TextStyles} from '../../styles/text';
+import {styles} from './styles';
 
 const {
   buttonStyle,
@@ -61,7 +59,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   label: 'SUBMIT',
-  color: Theme.PrimaryColor,
+  color: '#141414',
   disabled: false,
   loading: false,
   onPress: () => {},

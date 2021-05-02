@@ -1,20 +1,27 @@
 import CameraRoll from '@react-native-community/cameraroll';
 import React, {useRef} from 'react';
 import {
+  Image,
+  Modal,
   PermissionsAndroid,
   Platform,
   ToastAndroid,
   View,
-  Modal,
-  Image,
-  TouchableWithoutFeedback,
+  Text,
+  Linking,
 } from 'react-native';
 import RNFS from 'react-native-fs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Button} from '../../components';
-
 import styles from './styles';
 
-const {container, cardContainer, imageStyle} = styles;
+const {
+  container,
+  cardContainer,
+  imageStyle,
+  titleTextStyle,
+  previewTextStyle,
+} = styles;
 
 const Details = ({item, visible, toggle}) => {
   const {imageURL} = item || {};
@@ -49,6 +56,16 @@ const Details = ({item, visible, toggle}) => {
     return status === 'granted';
   };
 
+  const onPressPreview = () => {
+    const URL = 'https://onlinemenu.today/template2';
+
+    Linking.canOpenURL(URL).then(supported => {
+      if (supported) {
+        Linking.openURL(URL);
+      }
+    });
+  };
+
   return (
     <Modal
       visible={visible}
@@ -65,12 +82,22 @@ const Details = ({item, visible, toggle}) => {
               cache: 'force-cache',
             }}
           />
-          <Button
-            type="outline"
-            label="Preview"
-            containerStyle={{marginHorizontal: 100, marginTop: 15}}
-            onPress={toggle}
-          />
+          <Text style={titleTextStyle}>$ 0.99 Per Month</Text>
+          <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
+            <Button
+              label="UPGRADE PLAN TO APPLY"
+              containerStyle={{paddingHorizontal: 15, flex: 1}}
+              onPress={toggle}
+            />
+            <View style={{alignItems: 'center', paddingHorizontal: 15}}>
+              <Ionicons
+                name="expand-outline"
+                size={35}
+                onPress={onPressPreview}
+              />
+              <Text style={previewTextStyle}>Preview</Text>
+            </View>
+          </View>
         </View>
       </View>
     </Modal>
