@@ -22,12 +22,12 @@ export default StyleSheet.create({
     borderRadius: 5,
   },
   titleTextStyle: {
-    ...TextStyles.H1Regular,
-    fontSize: 20,
-    padding: 15,
+    ...TextStyles.H1SemiBold,
+    fontSize: 28,
+    marginRight: 5,
   },
   previewTextStyle: {
-    ...TextStyles.H2Regular,
+    ...TextStyles.H1Regular,
   },
   imageStyle: {
     width: '100%',

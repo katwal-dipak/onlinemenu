@@ -92,7 +92,11 @@ const Details = ({item, visible, toggle}) => {
               cache: 'force-cache',
             }}
           />
-          <Text style={titleTextStyle}>$ 0.99 Per Month</Text>
+          <View
+            style={{flexDirection: 'row', alignItems: 'baseline', padding: 15}}>
+            <Text style={titleTextStyle}>$ 0.99</Text>
+            <Text style={previewTextStyle}>Per Month</Text>
+          </View>
           <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
             <Button
               label="UPGRADE PLAN TO APPLY"
@@ -102,7 +106,7 @@ const Details = ({item, visible, toggle}) => {
             <View style={{alignItems: 'center', paddingHorizontal: 15}}>
               <Ionicons
                 name="expand-outline"
-                size={35}
+                size={30}
                 onPress={onPressPreview}
               />
               <Text style={previewTextStyle}>Preview</Text>
