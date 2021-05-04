@@ -31,7 +31,7 @@ const Login = () => {
       } else {
         // some other error happened
       }
-      console.log(error);
+      // console.log(error);
       setLoading(false);
     }
 

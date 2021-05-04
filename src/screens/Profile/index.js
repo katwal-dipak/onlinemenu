@@ -1,7 +1,9 @@
 import React from 'react';
 import {SafeAreaView, ScrollView, View, Text} from 'react-native';
-import {Button, TextInput} from '../../components';
+import {Button, TextInput, ActivityIndicator} from '../../components';
 import {styles} from './styles';
+
+import useFetchUserProfile from '../../hooks/useFetchUserProfile';
 
 const {
   containerStyle,
@@ -11,9 +13,13 @@ const {
 } = styles;
 
 const Profile = ({navigation}) => {
+  const {data, loading, error, onRetry} = useFetchUserProfile();
+
   const Spacer = () => <View style={{marginTop: 10}} />;
 
-  return (
+  return loading ? (
+    <ActivityIndicator />
+  ) : (
     <SafeAreaView style={containerStyle}>
       <View style={formContainerStyle}>
         <ScrollView

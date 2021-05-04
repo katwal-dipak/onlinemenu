@@ -10,7 +10,7 @@ const useAppInitialization = () => {
   const onAuthStateChanged = user => {
     if (user) {
       dispatch(setFirebaseAuthUserObj(user));
-      console.log(user);
+      // console.log(user);
     } else {
       dispatch(clearUserData());
     }
