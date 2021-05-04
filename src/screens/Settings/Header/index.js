@@ -1,10 +1,9 @@
 import React from 'react';
-import {Text, TouchableHighlight, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import {useSelector} from 'react-redux';
 import {Button} from '../../../components';
 import useAuthentication from '../../../hooks/useAuthentication';
-
 import {styles} from './styles';
 
 const {titleTextStyle, subTitleTextStyle, containerstyle, avatarStyle} = styles;

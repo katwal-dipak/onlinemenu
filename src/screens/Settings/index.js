@@ -1,7 +1,7 @@
 import React from 'react';
 import {Linking, Platform, SafeAreaView, Text, View} from 'react-native';
-
 import {useSelector} from 'react-redux';
+
 import {Divider} from '../../components';
 import useAuthentication from '../../hooks/useAuthentication';
 import {Components} from '../../styles/colors';
@@ -16,25 +16,12 @@ const APP_STORE_URL = 'https://apps.apple.com/us/app/sangalo/id1550242573';
 
 const Settings = ({navigation}) => {
   const {firebaseAuthUserObj} = useSelector(state => state.user);
-  const {uid, photoURL, email, displayName} = firebaseAuthUserObj || {};
+  const {uid} = firebaseAuthUserObj || {};
 
-  const {loading, onPressLogin, onPressLogout} = useAuthentication();
-
-  const onPressProfile = async () => {};
+  const {loading, onPressLogout} = useAuthentication();
 
   const Profile = () => {
-    return (
-      <Header
-        onPress={onPressProfile}
-        loggedIn={firebaseAuthUserObj && uid ? true : false}
-        email={email}
-        name={displayName}
-        photoURL={photoURL}
-        onPress={onPressLogin}
-        loading={loading}
-        navigation={navigation}
-      />
-    );
+    return <Header navigation={navigation} />;
   };
 
   const onPressRowItem = route_name => {};
@@ -106,8 +93,17 @@ const Settings = ({navigation}) => {
         <RowItem label="Share With Friends" onPress={onPressShare} />
         <RowDivider />
         <RowItem label="Feedbacks" onPress={onPressRateSangalo} />
-        <RowDivider />
-        <RowItem label="Sign Out" onPress={onPressLogout} />
+        {uid ? (
+          <View>
+            <RowDivider />
+            <RowItem
+              label="Sign Out"
+              onPress={loading ? null : onPressLogout}
+            />
+          </View>
+        ) : (
+          <View />
+        )}
       </View>
     );
   };
