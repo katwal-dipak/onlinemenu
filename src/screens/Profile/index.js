@@ -3,32 +3,50 @@ import {SafeAreaView, ScrollView, View, Text} from 'react-native';
 import {Button, TextInput} from '../../components';
 import {styles} from './styles';
 
-const {containerStyle, buttonContainerStyle, titleTextStyle} = styles;
+const {
+  containerStyle,
+  formContainerStyle,
+  buttonContainerStyle,
+  titleTextStyle,
+} = styles;
 
 const Profile = ({navigation}) => {
+  const Spacer = () => <View style={{marginTop: 10}} />;
+
   return (
     <SafeAreaView style={containerStyle}>
-      <ScrollView
-        style={containerStyle}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}>
-        <TextInput label="Name" placeholder="Business name" />
-        <TextInput label="Address" placeholder="Enter full address" />
+      <View style={formContainerStyle}>
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}>
+          <TextInput label="Name" placeholder="Business name" />
+          <Spacer />
+          <TextInput label="Address" placeholder="Enter full address" />
 
-        <Text style={titleTextStyle}>Contact</Text>
-        <TextInput label="Email" />
-        <TextInput label="Phone Number 1" />
-        <TextInput label="Phone Number 2" />
+          <Text style={titleTextStyle}>Contact</Text>
+          <Spacer />
+          <TextInput label="Email" />
+          <Spacer />
+          <TextInput label="Phone Number 1" />
+          <Spacer />
+          <TextInput label="Phone Number 2" />
+          <Spacer />
 
-        <Text style={titleTextStyle}>Social Media</Text>
-        <TextInput label="Facebook" />
-        <TextInput label="Instagram" placeholder="https://www.instagram.com" />
-        <TextInput label="Twitter" />
-        <TextInput label="Youtube" placeholder="Youtube channel URL" />
-        <Text style={titleTextStyle}>About</Text>
+          <Text style={titleTextStyle}>Social Media</Text>
+          <Spacer />
+          <TextInput label="Facebook" />
+          <Spacer />
+          <TextInput
+            label="Instagram"
+            placeholder="https://www.instagram.com"
+          />
+          <Spacer />
+          <TextInput label="Twitter" />
+          <Spacer />
+          <TextInput label="Youtube" placeholder="Youtube channel URL" />
+        </ScrollView>
+      </View>
 
-        <TextInput label="About Your Business" />
-      </ScrollView>
       <View style={buttonContainerStyle}>
         <Button />
       </View>
