@@ -3,7 +3,7 @@ import {SafeAreaView, ScrollView, View, Text} from 'react-native';
 import {Button, TextInput, ActivityIndicator} from '../../components';
 import {styles} from './styles';
 
-import useFetchUserProfile from '../../hooks/useFetchUserProfile';
+import useProfileForm from './useProfileForm';
 
 const {
   containerStyle,
@@ -13,7 +13,18 @@ const {
 } = styles;
 
 const Profile = ({navigation}) => {
-  const {data, loading, error, onRetry} = useFetchUserProfile();
+  const {
+    loading,
+    name,
+    email,
+    address,
+    phone1,
+    phone2,
+    facebookURL,
+    instagramURL,
+    twitterURL,
+    youtubeURL,
+  } = useProfileForm();
 
   const Spacer = () => <View style={{marginTop: 10}} />;
 
@@ -25,31 +36,40 @@ const Profile = ({navigation}) => {
         <ScrollView
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}>
-          <TextInput label="Name" placeholder="Business name" />
+          <TextInput label="Name" placeholder="Business name" value={name} />
           <Spacer />
-          <TextInput label="Address" placeholder="Enter full address" />
+          <TextInput
+            label="Address"
+            placeholder="Enter full address"
+            value={address}
+          />
 
           <Text style={titleTextStyle}>Contact</Text>
           <Spacer />
-          <TextInput label="Email" />
+          <TextInput label="Email" value={email} />
           <Spacer />
-          <TextInput label="Phone Number 1" />
+          <TextInput label="Phone Number 1" value={phone1} />
           <Spacer />
-          <TextInput label="Phone Number 2" />
+          <TextInput label="Phone Number 2" value={phone2} />
           <Spacer />
 
           <Text style={titleTextStyle}>Social Media</Text>
           <Spacer />
-          <TextInput label="Facebook" />
+          <TextInput label="Facebook" value={facebookURL} />
           <Spacer />
           <TextInput
             label="Instagram"
             placeholder="https://www.instagram.com"
+            value={instagramURL}
           />
           <Spacer />
-          <TextInput label="Twitter" />
+          <TextInput label="Twitter" value={twitterURL} />
           <Spacer />
-          <TextInput label="Youtube" placeholder="Youtube channel URL" />
+          <TextInput
+            label="Youtube"
+            placeholder="Youtube channel URL"
+            value={youtubeURL}
+          />
         </ScrollView>
       </View>
 

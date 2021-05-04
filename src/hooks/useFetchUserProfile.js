@@ -31,9 +31,6 @@ const useFetchUserProfile = () => {
           setError();
           setData(doc.data());
         }
-
-        if (!doc.exists) {
-        }
       } catch (error) {
         setLoading(false);
         setError(error);
