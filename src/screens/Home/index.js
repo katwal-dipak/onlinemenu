@@ -50,12 +50,14 @@ const Home = ({navigation}) => {
     const {imageURL} = item || {};
 
     return (
-      <MenuCard
-        imageURL={imageURL}
-        onPress={() => {
-          toggleDetailsView(), setSelectedItem(item);
-        }}
-      />
+      <View style={{alignSelf: 'center', marginTop: 15}}>
+        <MenuCard
+          imageURL={imageURL}
+          onPress={() => {
+            toggleDetailsView(), setSelectedItem(item);
+          }}
+        />
+      </View>
     );
   };
 
@@ -70,12 +72,15 @@ const Home = ({navigation}) => {
   return loading ? (
     <ActivityIndicator />
   ) : (
-    <View style={{flex: 1, backgroundColor: '#FFFFFF', alignItems: 'center'}}>
+    <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <FlatList
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        style={{flex: 1, marginBottom: 10}}
+        style={{
+          flex: 1,
+          marginBottom: 10,
+        }}
         showsVerticalScrollIndicator={false}
         data={templates || []}
         renderItem={RenderItem}
