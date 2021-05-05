@@ -1,10 +1,9 @@
 import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-//import {getUniqueId} from 'react-native-device-info';
+import {useSelector} from 'react-redux';
+import firestore from '@react-native-firebase/firestore';
 import {FIRESTORE_COLLECTION} from '../constants';
 
 const useUpdateUserProfile = () => {
-  const dispatch = useDispatch();
   const {firebaseAuthUserObj} = useSelector(state => state.user);
   const [loading, setLoading] = useState();
   const [success, setSuccess] = useState();
@@ -19,10 +18,13 @@ const useUpdateUserProfile = () => {
 
       const doc = await userDocRef.get();
 
-      if (doc.exists) {
-        await userDocRef.update(data);
+      const combinedData = {
+        ...data,
+        updatedAt: firestore.FieldValue.serverTimestamp(),
+      };
 
-        // dispatch(setUserDataFromDb());
+      if (doc.exists) {
+        await userDocRef.update(combinedData);
         setSuccess(true);
       } else {
         /**
@@ -32,7 +34,7 @@ const useUpdateUserProfile = () => {
          */
 
         await userDocRef.set(
-          {...data, id: uid},
+          {...combinedData, id: uid},
           {merge: true}, //this will prevent from accidental overwrite
         );
 

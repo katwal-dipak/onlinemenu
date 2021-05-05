@@ -1,7 +1,8 @@
 import React from 'react';
 import {SafeAreaView, ScrollView, Text, View} from 'react-native';
-import {ActivityIndicator, Button, TextInput} from '../../components';
+import {ActivityIndicator, TextInput} from '../../components';
 import {styles} from './styles';
+import SubmitButton from './SubmitButton';
 import useProfileForm from './useProfileForm';
 
 const {
@@ -105,7 +106,7 @@ const Profile = ({navigation}) => {
         </ScrollView>
       </View>
       <View style={buttonContainerStyle}>
-        <Button />
+        <SubmitButton navigation={navigation} />
       </View>
     </SafeAreaView>
   );
