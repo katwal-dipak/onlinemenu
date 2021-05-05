@@ -6,9 +6,11 @@ import {Provider} from 'react-redux';
 
 import AppNavigator from './src/navigations/AppNavigator';
 import userReducer from './src/store/reducers/user';
+import profileReducer from './src/store/reducers/profile';
 
 const rootReducer = combineReducers({
   user: userReducer,
+  profile: profileReducer,
 });
 
 let store = createStore(rootReducer);

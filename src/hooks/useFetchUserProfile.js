@@ -1,11 +1,11 @@
-import {useState, useEffect} from 'react';
-import {useSelector} from 'react-redux';
-
+import {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {FIRESTORE_COLLECTION} from '../constants';
+import {setPreviousProfileData} from '../store/actions/profile';
 
 const useFetchUserProfile = () => {
+  const dispatch = useDispatch();
   const {firebaseAuthUserObj} = useSelector(state => state.user);
-  const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -29,7 +29,7 @@ const useFetchUserProfile = () => {
 
         if (doc.exists) {
           setError();
-          setData(doc.data());
+          dispatch(setPreviousProfileData(doc.data()));
         }
       } catch (error) {
         setLoading(false);
@@ -46,7 +46,6 @@ const useFetchUserProfile = () => {
   };
 
   return {
-    data,
     loading,
     error,
     onRetry,
