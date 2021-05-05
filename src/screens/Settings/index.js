@@ -79,18 +79,18 @@ const Settings = ({navigation}) => {
     return (
       <View style={{margin: 0}}>
         <RowItem
-          label="Manage Profile"
+          label="Profile"
           onPress={() => {
             navigation.navigate('profile');
           }}
         />
         <RowDivider />
-        <RowItem label="Manage Menu" onPress={onPressRateSangalo} />
+        <RowItem label="Menu" onPress={onPressRateSangalo} />
         <RowDivider />
         <RowItem label="Subscription" onPress={onPressManageSubscription} />
 
         <RowDivider />
-        <RowItem label="Share With Friends" onPress={onPressShare} />
+        <RowItem label="Share" onPress={onPressShare} />
         <RowDivider />
         <RowItem label="Feedbacks" onPress={onPressRateSangalo} />
         {uid ? (
