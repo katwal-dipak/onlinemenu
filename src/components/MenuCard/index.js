@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {View, Image, TouchableHighlight} from 'react-native';
+import {Surface} from 'react-native-paper';
 
 import {styles} from './styles';
 import {Components} from '../../styles/colors';
@@ -10,7 +11,7 @@ const {containerStyle, imageStyle} = styles;
 const MenuCard = ({title, imageURL, onPress}) => {
   return (
     <TouchableHighlight onPress={onPress} underlayColor="transparent">
-      <View style={containerStyle}>
+      <Surface style={containerStyle}>
         <Image
           resizeMode="cover"
           style={imageStyle}
@@ -19,7 +20,7 @@ const MenuCard = ({title, imageURL, onPress}) => {
             cache: 'force-cache',
           }}
         />
-      </View>
+      </Surface>
     </TouchableHighlight>
   );
 };

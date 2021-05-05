@@ -11,9 +11,7 @@ export const styles = StyleSheet.create({
     backgroundColor: Components.Background.core,
     height: CARD_HEIGHT,
     width: CARD_WIDTH,
-    marginTop: 10,
     borderRadius: 5,
-    // elevation: 3,
   },
   imageStyle: {
     width: '100%',

@@ -50,7 +50,7 @@ const useFetchTemplates = () => {
         setLastVisible(lastVisibleDoc);
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

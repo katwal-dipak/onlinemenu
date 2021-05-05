@@ -5,7 +5,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 
-const useFetchTemplates = () => {
+const useAuthentication = () => {
   const [loading, setLoading] = useState(false);
 
   const onPressLogin = async () => {
@@ -60,4 +60,4 @@ const useFetchTemplates = () => {
   };
 };
 
-export default useFetchTemplates;
+export default useAuthentication;
