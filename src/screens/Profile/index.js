@@ -1,8 +1,7 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, View, Text} from 'react-native';
-import {Button, TextInput, ActivityIndicator} from '../../components';
+import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {ActivityIndicator, Button, TextInput} from '../../components';
 import {styles} from './styles';
-
 import useProfileForm from './useProfileForm';
 
 const {
@@ -24,6 +23,15 @@ const Profile = ({navigation}) => {
     instagramURL,
     twitterURL,
     youtubeURL,
+    onChangeName,
+    onChangeAddress,
+    onChangeEmail,
+    onChangePhone1,
+    onChangePhone2,
+    onChangeFacebookURL,
+    onChangeInstagramURL,
+    onChangeTwitterURL,
+    onChangeYoutubeURL,
   } = useProfileForm();
 
   const Spacer = () => <View style={{marginTop: 10}} />;
@@ -36,43 +44,66 @@ const Profile = ({navigation}) => {
         <ScrollView
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}>
-          <TextInput label="Name" placeholder="Business name" value={name} />
+          <TextInput
+            label="Name"
+            placeholder="Business name"
+            value={name}
+            onChangeText={onChangeName}
+          />
           <Spacer />
           <TextInput
             label="Address"
             placeholder="Enter full address"
             value={address}
+            onChangeYoutubeURL={onChangeAddress}
           />
 
           <Text style={titleTextStyle}>Contact</Text>
           <Spacer />
-          <TextInput label="Email" value={email} />
+          <TextInput label="Email" value={email} onChangeText={onChangeEmail} />
           <Spacer />
-          <TextInput label="Phone Number 1" value={phone1} />
+          <TextInput
+            label="Phone Number 1"
+            value={phone1}
+            onChangeText={onChangePhone1}
+          />
           <Spacer />
-          <TextInput label="Phone Number 2" value={phone2} />
+          <TextInput
+            label="Phone Number 2"
+            value={phone2}
+            onChangeText={onChangePhone2}
+          />
           <Spacer />
 
           <Text style={titleTextStyle}>Social Media</Text>
           <Spacer />
-          <TextInput label="Facebook" value={facebookURL} />
+          <TextInput
+            label="Facebook"
+            value={facebookURL}
+            onChangeText={onChangeFacebookURL}
+          />
           <Spacer />
           <TextInput
             label="Instagram"
             placeholder="https://www.instagram.com"
             value={instagramURL}
+            onChangeText={onChangeInstagramURL}
           />
           <Spacer />
-          <TextInput label="Twitter" value={twitterURL} />
+          <TextInput
+            label="Twitter"
+            value={twitterURL}
+            onChangeText={onChangeTwitterURL}
+          />
           <Spacer />
           <TextInput
             label="Youtube"
             placeholder="Youtube channel URL"
             value={youtubeURL}
+            onChangeText={onChangeYoutubeURL}
           />
         </ScrollView>
       </View>
-
       <View style={buttonContainerStyle}>
         <Button />
       </View>
