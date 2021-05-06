@@ -39,6 +39,8 @@ const useAuthentication = () => {
   const onPressLogout = async () => {
     setLoading(true);
 
+    console.log('logout---->');
+
     //This is google auth, removes user session from the device.
     try {
       await GoogleSignin.revokeAccess();
@@ -48,6 +50,7 @@ const useAuthentication = () => {
       await auth().signOut();
     } catch (error) {
       setLoading(false);
+      console.log(error);
     }
 
     setLoading(false);
