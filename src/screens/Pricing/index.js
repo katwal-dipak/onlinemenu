@@ -1,10 +1,23 @@
 import React from 'react';
-import {Linking, SafeAreaView, ScrollView, View} from 'react-native';
-import {PricingCard} from 'react-native-elements';
+import {
+  Linking,
+  SafeAreaView,
+  ScrollView,
+  TouchableHighlight,
+  View,
+  Text,
+} from 'react-native';
+import {Surface} from 'react-native-paper';
 import {Button} from '../../components';
 import {styles} from './styles';
 
-const {containerStyle, buttonContainerStyle} = styles;
+const {
+  containerStyle,
+  cardContainerStyle,
+  buttonContainerStyle,
+  titleTextStyle,
+  priceTextStyle,
+} = styles;
 
 const Pricing = ({navigation}) => {
   const onPressManageSubscription = () => {
@@ -17,48 +30,37 @@ const Pricing = ({navigation}) => {
     });
   };
 
+  const PricingCard = ({title, price, active}) => {
+    return (
+      <TouchableHighlight underlayColor="transparent">
+        <Surface style={cardContainerStyle}>
+          <View>
+            <Text style={titleTextStyle}>{title}</Text>
+            <Text style={priceTextStyle}>{price}</Text>
+          </View>
+
+          <Button label="SELECT PLAN" />
+        </Surface>
+      </TouchableHighlight>
+    );
+  };
+
   return (
     <SafeAreaView style={containerStyle}>
       <ScrollView
         style={containerStyle}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}>
-        <PricingCard
-          color="#53AEDD"
-          title="Free"
-          price="$0"
-          info={['1 Week', 'All Templates']}
-          button={{title: 'GET STARTED'}}
-          containerStyle={{borderColor: '#53AEDD'}}
-          // onButtonPress={onPressManageSubscription}
-        />
-
-        <PricingCard
-          color="#B595E7"
-          title="Starter"
-          price="$0.99"
-          info={['Per Month', 'Basic Templates']}
-          button={{title: 'SELECT PLAN'}}
-          containerStyle={{borderColor: '#B595E7'}}
-          onButtonPress={onPressManageSubscription}
-        />
-
-        <PricingCard
-          color="#E7AC44"
-          title="Pro"
-          price="$4.99"
-          info={['Per Month', 'Premium Templates']}
-          button={{title: 'SELECT PLAN'}}
-          containerStyle={{borderColor: '#E7AC44'}}
-          onButtonPress={onPressManageSubscription}
-        />
+        <PricingCard title="Free" price="$0 / month" active />
+        <PricingCard title="Starter" price="$0.99 / month" />
+        <PricingCard title="Pro" price="$4.99 / month" />
       </ScrollView>
-      <View style={buttonContainerStyle}>
+      {/*<View style={buttonContainerStyle}>
         <Button
           label="MANAGE SUBSCRIPTION"
           onPress={onPressManageSubscription}
         />
-      </View>
+     </View>*/}
     </SafeAreaView>
   );
 };
