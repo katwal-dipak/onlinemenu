@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     paddingTop: 15,
     borderTopColor: Components.Border,
     borderTopWidth: 1,
+    backgroundColor: Components.Background.core,
   },
   titleTextStyle: {
     ...TextStyles.H1SemiBold,
