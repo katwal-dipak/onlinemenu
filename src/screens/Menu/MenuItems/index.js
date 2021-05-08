@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Button, Divider} from '../../components';
+import {Button, Divider} from '../../../components';
 import {styles} from './styles';
 
 const {
@@ -16,7 +16,7 @@ const {
   borderStyle,
 } = styles;
 
-const Menu = ({navigation}) => {
+const MenuItems = ({navigation}) => {
   const onPressEditMenuSection = () => {
     navigation.navigate('edit_menu_section');
   };
@@ -27,12 +27,8 @@ const Menu = ({navigation}) => {
     const {title, data, active} = item || {};
     const itemsCount = data && Array.isArray(data) ? data.length : 0;
 
-    const onPressCard = () => {
-      navigation.navigate('menu_items');
-    };
-
     return (
-      <TouchableOpacity style={cardContainerStyle} onPress={onPressCard}>
+      <TouchableOpacity style={cardContainerStyle}>
         <Text style={active ? activeStatusTextStyle : inActiveStatusTextStyle}>
           {active ? 'Active' : 'Hidden'}
         </Text>
@@ -72,7 +68,7 @@ const Menu = ({navigation}) => {
   );
 };
 
-export default Menu;
+export default MenuItems;
 
 const data = [
   {id: 0, title: 'Breakfast', active: true, data: [1, 2, 3, 4, 5, 6]},
