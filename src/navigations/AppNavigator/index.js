@@ -13,6 +13,7 @@ import Menu from '../../screens/Menu';
 import MenuItems from '../../screens/Menu/MenuItems';
 import AddMenuItem from '../../screens/Menu/AddMenuItem';
 import EditMenuItem from '../../screens/Menu/EditMenuItem';
+import AddSection from '../../screens/Menu/AddSection';
 import EditSection from '../../screens/Menu/EditSection';
 
 import {TextStyles} from '../../styles/text';
@@ -87,7 +88,7 @@ const AppNavigator = () => {
         <Stack.Screen
           name="add_menu_item"
           component={AddMenuItem}
-          options={{headerTitle: 'Manage Menu'}}
+          options={{headerTitle: 'Add Menu Item'}}
         />
 
         <Stack.Screen
@@ -97,9 +98,15 @@ const AppNavigator = () => {
         />
 
         <Stack.Screen
+          name="add_menu_section"
+          component={AddSection}
+          options={{headerTitle: 'Add Section'}}
+        />
+
+        <Stack.Screen
           name="edit_menu_section"
           component={EditSection}
-          options={{headerTitle: 'Manage Menu'}}
+          options={{headerTitle: 'Edit Section'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,6 +1,11 @@
 import React from 'react';
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {
+  FlatList,
+  SafeAreaView,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import {Button, Divider} from '../../components';
 import {styles} from './styles';
 
@@ -17,6 +22,14 @@ const {
 } = styles;
 
 const Menu = ({navigation}) => {
+  const onPressCard = () => {
+    navigation.navigate('menu_items');
+  };
+
+  const onPressAddMenuSection = () => {
+    navigation.navigate('add_menu_section');
+  };
+
   const onPressEditMenuSection = () => {
     navigation.navigate('edit_menu_section');
   };
@@ -26,10 +39,6 @@ const Menu = ({navigation}) => {
   const RenderItem = ({item}) => {
     const {title, data, active} = item || {};
     const itemsCount = data && Array.isArray(data) ? data.length : 0;
-
-    const onPressCard = () => {
-      navigation.navigate('menu_items');
-    };
 
     return (
       <TouchableOpacity style={cardContainerStyle} onPress={onPressCard}>
@@ -47,7 +56,9 @@ const Menu = ({navigation}) => {
           }}>
           <Text style={itemsCountTextStyle}>{`${itemsCount} Items`}</Text>
           <Text style={borderStyle}>|</Text>
-          <Text style={editButtonTextStyle}>EDIT</Text>
+          <TouchableOpacity onPress={onPressEditMenuSection}>
+            <Text style={editButtonTextStyle}>EDIT</Text>
+          </TouchableOpacity>
         </View>
       </TouchableOpacity>
     );
@@ -66,7 +77,7 @@ const Menu = ({navigation}) => {
         keyExtractor={keyExtractor}
       />
       <View style={buttonContainerStyle}>
-        <Button label="ADD NEW SECTION" onPress={onPressEditMenuSection} />
+        <Button label="ADD NEW SECTION" onPress={onPressAddMenuSection} />
       </View>
     </SafeAreaView>
   );
