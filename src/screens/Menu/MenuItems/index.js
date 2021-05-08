@@ -1,6 +1,11 @@
 import React from 'react';
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {
+  FlatList,
+  SafeAreaView,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import {Button, Divider} from '../../../components';
 import {styles} from './styles';
 
@@ -17,22 +22,29 @@ const {
 } = styles;
 
 const MenuItems = ({navigation}) => {
-  const onPressEditMenuSection = () => {
-    navigation.navigate('edit_menu_section');
+  const onPressAddNewItem = () => {
+    navigation.navigate('add_menu_item');
   };
 
   const keyExtractor = (item, index) => index.toString();
 
+  const onPressEditMenuItem = () => {
+    navigation.navigate('edit_menu_item');
+  };
+
   const RenderItem = ({item}) => {
-    const {title, data, active} = item || {};
-    const itemsCount = data && Array.isArray(data) ? data.length : 0;
+    const {title, description, active, price} = item || {};
 
     return (
-      <TouchableOpacity style={cardContainerStyle}>
+      <View style={cardContainerStyle}>
         <Text style={active ? activeStatusTextStyle : inActiveStatusTextStyle}>
           {active ? 'Active' : 'Hidden'}
         </Text>
-        <Text style={titleTextStyle}>{title}</Text>
+        <View style={{marginVertical: 15}}>
+          <Text style={titleTextStyle}>{title}</Text>
+          <Text style={itemsCountTextStyle}>{description}</Text>
+        </View>
+
         <Divider />
         <View
           style={{
@@ -41,11 +53,13 @@ const MenuItems = ({navigation}) => {
             alignItems: 'center',
             marginTop: 15,
           }}>
-          <Text style={itemsCountTextStyle}>{`${itemsCount} Items`}</Text>
+          <Text style={itemsCountTextStyle}>{price}</Text>
           <Text style={borderStyle}>|</Text>
-          <Text style={editButtonTextStyle}>EDIT</Text>
+          <TouchableOpacity onPress={onPressEditMenuItem}>
+            <Text style={editButtonTextStyle}>EDIT</Text>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   };
 
@@ -62,7 +76,7 @@ const MenuItems = ({navigation}) => {
         keyExtractor={keyExtractor}
       />
       <View style={buttonContainerStyle}>
-        <Button label="ADD NEW SECTION" onPress={onPressEditMenuSection} />
+        <Button label="ADD NEW ITEM" onPress={onPressAddNewItem} />
       </View>
     </SafeAreaView>
   );
@@ -71,7 +85,31 @@ const MenuItems = ({navigation}) => {
 export default MenuItems;
 
 const data = [
-  {id: 0, title: 'Breakfast', active: true, data: [1, 2, 3, 4, 5, 6]},
-  {id: 1, title: 'Lunch', active: false, data: [1, 2, 3]},
-  {id: 2, title: 'Dinner', active: true, data: [1, 2, 3, 4, 5]},
+  {
+    id: 0,
+    title: 'AFFOGATO',
+    description:
+      'Espresso poured on a vanilla ice cream. Served in a cappuccino cup',
+    active: true,
+    price: '$4.20',
+    data: [1, 2, 3, 4, 5, 6],
+  },
+  {
+    id: 1,
+    title: 'CAFFÈ MOCHA',
+    description:
+      'A caffè latte with chocolate and whipped cream, made by pouring about 2 cl of chocolate sauce into the glass, followed by an espresso shot and steamed milk',
+    active: false,
+    price: '$1.00',
+    data: [1, 2, 3],
+  },
+  {
+    id: 2,
+    title: 'AMERICANO (or ESPRESSO AMERICANO)',
+    description:
+      'Espresso with added hot water (100–150 ml). Often served in a cappuccino cup. (The espresso is added into the hot water rather than all the water being flowed through the coffee that would lead to over extraction.)',
+    active: true,
+    price: '$10.00',
+    data: [1, 2, 3, 4, 5],
+  },
 ];

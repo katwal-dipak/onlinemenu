@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   titleTextStyle: {
     ...TextStyles.H1SemiBold,
     fontSize: 25,
-    marginVertical: 10,
+    marginBottom: 10,
   },
   activeStatusTextStyle: {
     ...TextStyles.H2Regular,

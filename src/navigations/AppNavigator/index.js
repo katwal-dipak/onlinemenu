@@ -11,6 +11,8 @@ import Settings from '../../screens/Settings';
 import Profile from '../../screens/Profile';
 import Menu from '../../screens/Menu';
 import MenuItems from '../../screens/Menu/MenuItems';
+import AddMenuItem from '../../screens/Menu/AddMenuItem';
+import EditMenuItem from '../../screens/Menu/EditMenuItem';
 import EditSection from '../../screens/Menu/EditSection';
 
 import {TextStyles} from '../../styles/text';
@@ -80,6 +82,18 @@ const AppNavigator = () => {
           name="menu_items"
           component={MenuItems}
           options={{headerTitle: 'Menu Items'}}
+        />
+
+        <Stack.Screen
+          name="add_menu_item"
+          component={AddMenuItem}
+          options={{headerTitle: 'Manage Menu'}}
+        />
+
+        <Stack.Screen
+          name="edit_menu_item"
+          component={EditMenuItem}
+          options={{headerTitle: 'Edit Menu Item'}}
         />
 
         <Stack.Screen
