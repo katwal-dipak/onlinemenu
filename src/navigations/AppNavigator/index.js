@@ -9,6 +9,7 @@ import Login from '../../screens/Login';
 import Pricing from '../../screens/Pricing';
 import Settings from '../../screens/Settings';
 import Profile from '../../screens/Profile';
+import Menu from '../../screens/Menu';
 
 import {TextStyles} from '../../styles/text';
 
@@ -65,6 +66,12 @@ const AppNavigator = () => {
           name="profile"
           component={Profile}
           options={{headerTitle: 'Profile'}}
+        />
+
+        <Stack.Screen
+          name="menu"
+          component={Menu}
+          options={{headerTitle: 'Menu'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

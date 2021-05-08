@@ -85,7 +85,12 @@ const Settings = ({navigation}) => {
           }}
         />
         <RowDivider />
-        <RowItem label="Menu" onPress={onPressRateSangalo} />
+        <RowItem
+          label="Menu"
+          onPress={() => {
+            navigation.navigate('menu');
+          }}
+        />
         <RowDivider />
         <RowItem label="Subscription" onPress={onPressManageSubscription} />
 
