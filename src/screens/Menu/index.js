@@ -1,8 +1,6 @@
 import React from 'react';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Surface} from 'react-native-paper';
 import {Button, Divider} from '../../components';
 import {styles} from './styles';
 
@@ -19,6 +17,10 @@ const {
 } = styles;
 
 const Menu = ({navigation}) => {
+  const onPressEditMenuSection = () => {
+    navigation.navigate('edit_menu_section');
+  };
+
   const keyExtractor = (item, index) => index.toString();
 
   const RenderItem = ({item}) => {
@@ -60,7 +62,7 @@ const Menu = ({navigation}) => {
         keyExtractor={keyExtractor}
       />
       <View style={buttonContainerStyle}>
-        <Button label="ADD NEW SECTION" />
+        <Button label="ADD NEW SECTION" onPress={onPressEditMenuSection} />
       </View>
     </SafeAreaView>
   );
