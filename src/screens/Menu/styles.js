@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import {Components} from '../../styles/colors';
+import {Components, Theme} from '../../styles/colors';
 import {TextStyles} from '../../styles/text';
 
 export const styles = StyleSheet.create({
@@ -25,9 +25,13 @@ export const styles = StyleSheet.create({
     fontSize: 25,
     marginVertical: 10,
   },
-  statusTextStyle: {
+  activeStatusTextStyle: {
     ...TextStyles.H2Regular,
-    color: 'green',
+    color: Theme.SecondaryColor,
+  },
+  inActiveStatusTextStyle: {
+    ...TextStyles.H2Regular,
+    color: Components.Text.H3,
   },
   itemsCountTextStyle: {
     ...TextStyles.H1Regular,
