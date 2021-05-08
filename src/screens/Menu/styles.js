@@ -1,25 +1,18 @@
 import {StyleSheet} from 'react-native';
 
 import {Components} from '../../styles/colors';
-import {DEVICE} from '../../constants';
 import {TextStyles} from '../../styles/text';
-
-const CARD_WIDTH = DEVICE.width - 30;
-const CARD_HEIGHT = CARD_WIDTH * 0.8;
 
 export const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
-    backgroundColor: Components.Background.core,
+    backgroundColor: Components.Background.tint75Percent,
   },
   cardContainerStyle: {
-    height: CARD_HEIGHT,
-    width: CARD_WIDTH,
     borderRadius: 3,
-    alignSelf: 'center',
-    marginVertical: 20,
-    padding: 25,
-    justifyContent: 'space-between',
+    padding: 15,
+    marginBottom: 10,
+    backgroundColor: Components.Background.core,
   },
   buttonContainerStyle: {
     paddingHorizontal: 25,
@@ -30,10 +23,19 @@ export const styles = StyleSheet.create({
   titleTextStyle: {
     ...TextStyles.H1SemiBold,
     fontSize: 25,
+    marginVertical: 10,
   },
-  priceTextStyle: {
-    ...TextStyles.H2SemiBold,
-    fontSize: 22,
-    marginTop: 15,
+  statusTextStyle: {
+    ...TextStyles.H2Regular,
+    color: 'green',
+  },
+  itemsCountTextStyle: {
+    ...TextStyles.H1Regular,
+  },
+  editButtonTextStyle: {
+    ...TextStyles.H1SemiBold,
+  },
+  borderStyle: {
+    color: Components.Border,
   },
 });

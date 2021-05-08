@@ -1,14 +1,9 @@
 import React from 'react';
-import {
-  Linking,
-  SafeAreaView,
-  ScrollView,
-  TouchableHighlight,
-  View,
-  Text,
-} from 'react-native';
+import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Surface} from 'react-native-paper';
-import {Button} from '../../components';
+import {Button, Divider} from '../../components';
 import {styles} from './styles';
 
 const {
@@ -16,51 +11,52 @@ const {
   cardContainerStyle,
   buttonContainerStyle,
   titleTextStyle,
-  priceTextStyle,
+  statusTextStyle,
+  itemsCountTextStyle,
+  editButtonTextStyle,
+  borderStyle,
 } = styles;
 
 const Menu = ({navigation}) => {
-  const onPressManageSubscription = () => {
-    const URL = 'https://onlinemenu.today/';
+  const keyExtractor = (item, index) => index.toString();
 
-    Linking.canOpenURL(URL).then(supported => {
-      if (supported) {
-        Linking.openURL(URL);
-      }
-    });
-  };
-
-  const PricingCard = ({title, price, active}) => {
+  const RenderItem = ({title, price, active}) => {
     return (
-      <TouchableHighlight underlayColor="transparent">
-        <Surface style={cardContainerStyle}>
-          <View>
-            <Text style={titleTextStyle}>{title}</Text>
-            <Text style={priceTextStyle}>{price}</Text>
-          </View>
+      <TouchableOpacity style={cardContainerStyle}>
+        <Text style={statusTextStyle}>Active</Text>
 
-          <Button label="SELECT PLAN" />
-        </Surface>
-      </TouchableHighlight>
+        <Text style={titleTextStyle}>Breakfast</Text>
+        <Divider />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 15,
+          }}>
+          <Text style={itemsCountTextStyle}>4 Items</Text>
+          <Text style={borderStyle}>|</Text>
+          <Text style={editButtonTextStyle}>EDIT</Text>
+        </View>
+      </TouchableOpacity>
     );
   };
 
   return (
     <SafeAreaView style={containerStyle}>
-      <ScrollView
-        style={containerStyle}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}>
-        <PricingCard title="Free" price="$0 / month" active />
-        <PricingCard title="Starter" price="$0.99 / month" />
-        <PricingCard title="Pro" price="$4.99 / month" />
-      </ScrollView>
-      {/*<View style={buttonContainerStyle}>
-        <Button
-          label="MANAGE SUBSCRIPTION"
-          onPress={onPressManageSubscription}
-        />
-     </View>*/}
+      <FlatList
+        style={{
+          flex: 1,
+          margin: 10,
+        }}
+        showsVerticalScrollIndicator={false}
+        data={[{id: 1}, {id: 2}, {id: 3}]}
+        renderItem={RenderItem}
+        keyExtractor={keyExtractor}
+      />
+      <View style={buttonContainerStyle}>
+        <Button label="ADD NEW SECTION" />
+      </View>
     </SafeAreaView>
   );
 };
