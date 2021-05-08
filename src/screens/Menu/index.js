@@ -1,14 +1,12 @@
 import React from 'react';
 import {
-  Linking,
+  FlatList,
   SafeAreaView,
-  ScrollView,
-  TouchableHighlight,
-  View,
   Text,
+  View,
+  TouchableOpacity,
 } from 'react-native';
-import {Surface} from 'react-native-paper';
-import {Button} from '../../components';
+import {Button, Divider} from '../../components';
 import {styles} from './styles';
 
 const {
@@ -16,53 +14,79 @@ const {
   cardContainerStyle,
   buttonContainerStyle,
   titleTextStyle,
-  priceTextStyle,
+  activeStatusTextStyle,
+  inActiveStatusTextStyle,
+  itemsCountTextStyle,
+  editButtonTextStyle,
+  borderStyle,
 } = styles;
 
 const Menu = ({navigation}) => {
-  const onPressManageSubscription = () => {
-    const URL = 'https://onlinemenu.today/';
-
-    Linking.canOpenURL(URL).then(supported => {
-      if (supported) {
-        Linking.openURL(URL);
-      }
-    });
+  const onPressCard = () => {
+    navigation.navigate('menu_items');
   };
 
-  const PricingCard = ({title, price, active}) => {
-    return (
-      <TouchableHighlight underlayColor="transparent">
-        <Surface style={cardContainerStyle}>
-          <View>
-            <Text style={titleTextStyle}>{title}</Text>
-            <Text style={priceTextStyle}>{price}</Text>
-          </View>
+  const onPressAddMenuSection = () => {
+    navigation.navigate('add_menu_section');
+  };
 
-          <Button label="SELECT PLAN" />
-        </Surface>
-      </TouchableHighlight>
+  const onPressEditMenuSection = () => {
+    navigation.navigate('edit_menu_section');
+  };
+
+  const keyExtractor = (item, index) => index.toString();
+
+  const RenderItem = ({item}) => {
+    const {title, data, active} = item || {};
+    const itemsCount = data && Array.isArray(data) ? data.length : 0;
+
+    return (
+      <TouchableOpacity style={cardContainerStyle} onPress={onPressCard}>
+        <Text style={active ? activeStatusTextStyle : inActiveStatusTextStyle}>
+          {active ? 'Active' : 'Hidden'}
+        </Text>
+        <Text style={titleTextStyle}>{title}</Text>
+        <Divider />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 15,
+          }}>
+          <Text style={itemsCountTextStyle}>{`${itemsCount} Items`}</Text>
+          <Text style={borderStyle}>|</Text>
+          <TouchableOpacity onPress={onPressEditMenuSection}>
+            <Text style={editButtonTextStyle}>EDIT</Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
     );
   };
 
   return (
     <SafeAreaView style={containerStyle}>
-      <ScrollView
-        style={containerStyle}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}>
-        <PricingCard title="Free" price="$0 / month" active />
-        <PricingCard title="Starter" price="$0.99 / month" />
-        <PricingCard title="Pro" price="$4.99 / month" />
-      </ScrollView>
-      {/*<View style={buttonContainerStyle}>
-        <Button
-          label="MANAGE SUBSCRIPTION"
-          onPress={onPressManageSubscription}
-        />
-     </View>*/}
+      <FlatList
+        style={{
+          flex: 1,
+          margin: 10,
+        }}
+        showsVerticalScrollIndicator={false}
+        data={data}
+        renderItem={RenderItem}
+        keyExtractor={keyExtractor}
+      />
+      <View style={buttonContainerStyle}>
+        <Button label="ADD NEW SECTION" onPress={onPressAddMenuSection} />
+      </View>
     </SafeAreaView>
   );
 };
 
 export default Menu;
+
+const data = [
+  {id: 0, title: 'Breakfast', active: true, data: [1, 2, 3, 4, 5, 6]},
+  {id: 1, title: 'Lunch', active: false, data: [1, 2, 3]},
+  {id: 2, title: 'Dinner', active: true, data: [1, 2, 3, 4, 5]},
+];

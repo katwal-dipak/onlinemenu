@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
-import {Components, Theme} from '../../styles/colors';
-import {TextStyles} from '../../styles/text';
+import {Components, Theme} from '../../../styles/colors';
+import {TextStyles} from '../../../styles/text';
 
 export const styles = StyleSheet.create({
   containerStyle: {
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   titleTextStyle: {
     ...TextStyles.H1SemiBold,
     fontSize: 25,
-    marginVertical: 10,
+    marginBottom: 10,
   },
   activeStatusTextStyle: {
     ...TextStyles.H2Regular,
