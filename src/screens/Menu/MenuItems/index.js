@@ -3,9 +3,10 @@ import {
   FlatList,
   SafeAreaView,
   Text,
-  View,
   TouchableOpacity,
+  View,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 import {Button, Divider} from '../../../components';
 import {styles} from './styles';
 
@@ -21,11 +22,15 @@ const {
   borderStyle,
 } = styles;
 
-const MenuItems = ({navigation, route}) => {
-  const {menuSectionIndex, menuItems} = route.params || {};
+const MenuItems = ({navigation}) => {
+  const {menu, selectedMenuSectionIndex} = useSelector(state => state.menu);
+  const {data} =
+    menu && Array.isArray(menu) ? menu[selectedMenuSectionIndex] : {};
 
   const onPressAddNewItem = () => {
-    navigation.navigate('add_menu_item', {menuSectionIndex});
+    navigation.navigate('add_menu_item', {
+      menuSectionIndex: selectedMenuSectionIndex,
+    });
   };
 
   const keyExtractor = (item, index) => index.toString();
@@ -73,7 +78,7 @@ const MenuItems = ({navigation, route}) => {
           margin: 10,
         }}
         showsVerticalScrollIndicator={false}
-        data={menuItems || []}
+        data={data || []}
         renderItem={RenderItem}
         keyExtractor={keyExtractor}
       />

@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ActivityIndicator, Button, Divider} from '../../components';
 import useFetchMenu from '../../hooks/useFetchMenu';
+import {setSelectedMenuSectionIndex} from '../../store/actions/menu';
 import {styles} from './styles';
 
 const {
@@ -24,14 +25,14 @@ const {
 } = styles;
 
 const Menu = ({navigation}) => {
+  const dispatch = useDispatch();
   const {menu} = useSelector(state => state.menu);
   const {loading} = useFetchMenu();
 
-  const onPressCard = (index, data) => {
-    navigation.navigate('menu_items', {
-      menuSectionIndex: index,
-      menuItems: data,
-    });
+  const onPressCard = index => {
+    navigation.navigate('menu_items');
+
+    dispatch(setSelectedMenuSectionIndex(index));
   };
 
   const onPressAddMenuSection = () => {
@@ -52,7 +53,7 @@ const Menu = ({navigation}) => {
       <TouchableOpacity
         style={cardContainerStyle}
         onPress={() => {
-          onPressCard(index, data);
+          onPressCard(index);
         }}>
         <Text style={active ? activeStatusTextStyle : inActiveStatusTextStyle}>
           {active ? 'Active' : 'Hidden'}

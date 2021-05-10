@@ -1,7 +1,12 @@
-import {SET_MENU, RESET_MENU} from '../actions/menu';
+import {
+  SET_MENU,
+  SET_SELECTED_SECTION_INDEX,
+  RESET_MENU,
+} from '../actions/menu';
 
 const initialState = {
   menu: null,
+  selectedMenuSectionIndex: null,
 };
 
 export default (state = initialState, action) => {
@@ -12,6 +17,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         menu: payload,
+      };
+
+    case SET_SELECTED_SECTION_INDEX:
+      return {
+        ...state,
+        selectedMenuSectionIndex: payload,
       };
 
     case RESET_MENU:

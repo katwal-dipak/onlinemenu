@@ -1,8 +1,14 @@
 export const SET_MENU = 'SET_MENU';
+export const SET_SELECTED_SECTION_INDEX = 'SET_SELECTED_SECTION_INDEX';
 export const RESET_MENU = 'SET_MENU';
 
 export const setMenu = payload => ({
   type: SET_MENU,
+  payload,
+});
+
+export const setSelectedMenuSectionIndex = payload => ({
+  type: SET_SELECTED_SECTION_INDEX,
   payload,
 });
 
