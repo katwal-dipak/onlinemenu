@@ -10,6 +10,7 @@ const AddMenuItem = ({navigation, route}) => {
   const {menuSectionIndex} = route.params || {};
   const [title, setTitle] = useState();
   const [price, setPrice] = useState();
+  const [description, setDescription] = useState();
   const {loading, success, onAddNewMenuItem} = useUpdateMenu();
 
   const onChangeTitle = value => {
@@ -20,8 +21,17 @@ const AddMenuItem = ({navigation, route}) => {
     setPrice(value);
   };
 
+  const onChangeDescription = value => {
+    setDescription(value);
+  };
+
   const onPressSubmit = () => {
-    onAddNewMenuItem(menuSectionIndex, {title, price, active: true});
+    onAddNewMenuItem(menuSectionIndex, {
+      title,
+      price,
+      description,
+      active: true,
+    });
   };
 
   const onPressDone = () => {
@@ -34,6 +44,12 @@ const AddMenuItem = ({navigation, route}) => {
         <TextInput label="Title" value={title} onChangeText={onChangeTitle} />
         <View style={{marginTop: 10}} />
         <TextInput label="Price" value={price} onChangeText={onChangePrice} />
+        <View style={{marginTop: 10}} />
+        <TextInput
+          label="Description"
+          value={description}
+          onChangeText={onChangeDescription}
+        />
       </View>
       <View style={buttonContainerStyle}>
         {success ? (
