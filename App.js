@@ -7,10 +7,12 @@ import {Provider} from 'react-redux';
 import AppNavigator from './src/navigations/AppNavigator';
 import userReducer from './src/store/reducers/user';
 import profileReducer from './src/store/reducers/profile';
+import menuReducer from './src/store/reducers/menu';
 
 const rootReducer = combineReducers({
   user: userReducer,
   profile: profileReducer,
+  menu: menuReducer,
 });
 
 let store = createStore(rootReducer);
