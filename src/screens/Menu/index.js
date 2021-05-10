@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 import {Button, Divider} from '../../components';
 import {styles} from './styles';
 
@@ -22,6 +23,8 @@ const {
 } = styles;
 
 const Menu = ({navigation}) => {
+  const {menu} = useSelector(state => state.menu);
+
   const onPressCard = () => {
     navigation.navigate('menu_items');
   };
@@ -72,7 +75,7 @@ const Menu = ({navigation}) => {
           margin: 10,
         }}
         showsVerticalScrollIndicator={false}
-        data={data}
+        data={menu || []}
         renderItem={RenderItem}
         keyExtractor={keyExtractor}
       />
@@ -84,9 +87,3 @@ const Menu = ({navigation}) => {
 };
 
 export default Menu;
-
-const data = [
-  {id: 0, title: 'Breakfast', active: true, data: [1, 2, 3, 4, 5, 6]},
-  {id: 1, title: 'Lunch', active: false, data: [1, 2, 3]},
-  {id: 2, title: 'Dinner', active: true, data: [1, 2, 3, 4, 5]},
-];
