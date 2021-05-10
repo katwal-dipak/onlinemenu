@@ -1,7 +1,6 @@
 import {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {FIRESTORE_COLLECTION} from '../constants';
-
 import {setMenu} from '../store/actions/menu';
 
 const useUpdateMenu = () => {
@@ -13,17 +12,6 @@ const useUpdateMenu = () => {
 
   const {uid} = firebaseAuthUserObj || {};
   const userDocRef = FIRESTORE_COLLECTION.USERS.doc(uid);
-
-  const fetchMenu = async () => {
-    setLoading(true);
-    const doc = await userDocRef.get();
-
-    if (doc.exists) {
-      dispatch(setMenu(doc.data()));
-    }
-
-    setLoading(false);
-  };
 
   const onAddNewMenuSection = async item => {
     setLoading(true);
@@ -50,7 +38,6 @@ const useUpdateMenu = () => {
   return {
     loading,
     success,
-    fetchMenu,
     onAddNewMenuSection,
     onUpdateMenuSection,
     onAddNewMenuItem,

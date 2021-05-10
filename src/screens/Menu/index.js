@@ -3,11 +3,12 @@ import {
   FlatList,
   SafeAreaView,
   Text,
-  View,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {useSelector} from 'react-redux';
-import {Button, Divider} from '../../components';
+import {Button, Divider, ActivityIndicator} from '../../components';
+import useFetchMenu from '../../hooks/useFetchMenu';
 import {styles} from './styles';
 
 const {
@@ -24,6 +25,7 @@ const {
 
 const Menu = ({navigation}) => {
   const {menu} = useSelector(state => state.menu);
+  const {loading} = useFetchMenu();
 
   const onPressCard = () => {
     navigation.navigate('menu_items');
@@ -67,7 +69,9 @@ const Menu = ({navigation}) => {
     );
   };
 
-  return (
+  return loading ? (
+    <ActivityIndicator />
+  ) : (
     <SafeAreaView style={containerStyle}>
       <FlatList
         style={{
