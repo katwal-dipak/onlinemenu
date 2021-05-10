@@ -21,9 +21,11 @@ const {
   borderStyle,
 } = styles;
 
-const MenuItems = ({navigation}) => {
+const MenuItems = ({navigation, route}) => {
+  const {menuSectionIndex, menuItems} = route.params || {};
+
   const onPressAddNewItem = () => {
-    navigation.navigate('add_menu_item');
+    navigation.navigate('add_menu_item', {menuSectionIndex});
   };
 
   const keyExtractor = (item, index) => index.toString();
@@ -71,7 +73,7 @@ const MenuItems = ({navigation}) => {
           margin: 10,
         }}
         showsVerticalScrollIndicator={false}
-        data={data}
+        data={menuItems || []}
         renderItem={RenderItem}
         keyExtractor={keyExtractor}
       />

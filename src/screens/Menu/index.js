@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import {useSelector} from 'react-redux';
-import {Button, Divider, ActivityIndicator} from '../../components';
+import {ActivityIndicator, Button, Divider} from '../../components';
 import useFetchMenu from '../../hooks/useFetchMenu';
 import {styles} from './styles';
 
@@ -27,8 +27,11 @@ const Menu = ({navigation}) => {
   const {menu} = useSelector(state => state.menu);
   const {loading} = useFetchMenu();
 
-  const onPressCard = () => {
-    navigation.navigate('menu_items');
+  const onPressCard = (index, data) => {
+    navigation.navigate('menu_items', {
+      menuSectionIndex: index,
+      menuItems: data,
+    });
   };
 
   const onPressAddMenuSection = () => {
@@ -41,12 +44,16 @@ const Menu = ({navigation}) => {
 
   const keyExtractor = (item, index) => index.toString();
 
-  const RenderItem = ({item}) => {
+  const RenderItem = ({item, index}) => {
     const {title, data, active} = item || {};
     const itemsCount = data && Array.isArray(data) ? data.length : 0;
 
     return (
-      <TouchableOpacity style={cardContainerStyle} onPress={onPressCard}>
+      <TouchableOpacity
+        style={cardContainerStyle}
+        onPress={() => {
+          onPressCard(index, data);
+        }}>
         <Text style={active ? activeStatusTextStyle : inActiveStatusTextStyle}>
           {active ? 'Active' : 'Hidden'}
         </Text>
