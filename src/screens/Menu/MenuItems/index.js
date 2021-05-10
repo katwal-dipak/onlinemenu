@@ -3,9 +3,10 @@ import {
   FlatList,
   SafeAreaView,
   Text,
-  View,
   TouchableOpacity,
+  View,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 import {Button, Divider} from '../../../components';
 import {styles} from './styles';
 
@@ -22,8 +23,14 @@ const {
 } = styles;
 
 const MenuItems = ({navigation}) => {
+  const {menu, selectedMenuSectionIndex} = useSelector(state => state.menu);
+  const {data} =
+    menu && Array.isArray(menu) ? menu[selectedMenuSectionIndex] : {};
+
   const onPressAddNewItem = () => {
-    navigation.navigate('add_menu_item');
+    navigation.navigate('add_menu_item', {
+      menuSectionIndex: selectedMenuSectionIndex,
+    });
   };
 
   const keyExtractor = (item, index) => index.toString();
@@ -71,7 +78,7 @@ const MenuItems = ({navigation}) => {
           margin: 10,
         }}
         showsVerticalScrollIndicator={false}
-        data={data}
+        data={data || []}
         renderItem={RenderItem}
         keyExtractor={keyExtractor}
       />
@@ -83,33 +90,3 @@ const MenuItems = ({navigation}) => {
 };
 
 export default MenuItems;
-
-const data = [
-  {
-    id: 0,
-    title: 'AFFOGATO',
-    description:
-      'Espresso poured on a vanilla ice cream. Served in a cappuccino cup',
-    active: true,
-    price: '$4.20',
-    data: [1, 2, 3, 4, 5, 6],
-  },
-  {
-    id: 1,
-    title: 'CAFFÈ MOCHA',
-    description:
-      'A caffè latte with chocolate and whipped cream, made by pouring about 2 cl of chocolate sauce into the glass, followed by an espresso shot and steamed milk',
-    active: false,
-    price: '$1.00',
-    data: [1, 2, 3],
-  },
-  {
-    id: 2,
-    title: 'AMERICANO (or ESPRESSO AMERICANO)',
-    description:
-      'Espresso with added hot water (100–150 ml). Often served in a cappuccino cup. (The espresso is added into the hot water rather than all the water being flowed through the coffee that would lead to over extraction.)',
-    active: true,
-    price: '$10.00',
-    data: [1, 2, 3, 4, 5],
-  },
-];

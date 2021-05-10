@@ -1,0 +1,37 @@
+import {
+  SET_MENU,
+  SET_SELECTED_SECTION_INDEX,
+  RESET_MENU,
+} from '../actions/menu';
+
+const initialState = {
+  menu: null,
+  selectedMenuSectionIndex: null,
+};
+
+export default (state = initialState, action) => {
+  const {type, payload} = action;
+
+  switch (type) {
+    case SET_MENU:
+      return {
+        ...state,
+        menu: payload,
+      };
+
+    case SET_SELECTED_SECTION_INDEX:
+      return {
+        ...state,
+        selectedMenuSectionIndex: payload,
+      };
+
+    case RESET_MENU:
+      return {
+        ...state,
+        ...initialState,
+      };
+
+    default:
+      return state;
+  }
+};

@@ -3,10 +3,13 @@ import {
   FlatList,
   SafeAreaView,
   Text,
-  View,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import {Button, Divider} from '../../components';
+import {useDispatch, useSelector} from 'react-redux';
+import {ActivityIndicator, Button, Divider} from '../../components';
+import useFetchMenu from '../../hooks/useFetchMenu';
+import {setSelectedMenuSectionIndex} from '../../store/actions/menu';
 import {styles} from './styles';
 
 const {
@@ -22,8 +25,14 @@ const {
 } = styles;
 
 const Menu = ({navigation}) => {
-  const onPressCard = () => {
+  const dispatch = useDispatch();
+  const {menu} = useSelector(state => state.menu);
+  const {loading} = useFetchMenu();
+
+  const onPressCard = index => {
     navigation.navigate('menu_items');
+
+    dispatch(setSelectedMenuSectionIndex(index));
   };
 
   const onPressAddMenuSection = () => {
@@ -36,12 +45,16 @@ const Menu = ({navigation}) => {
 
   const keyExtractor = (item, index) => index.toString();
 
-  const RenderItem = ({item}) => {
+  const RenderItem = ({item, index}) => {
     const {title, data, active} = item || {};
     const itemsCount = data && Array.isArray(data) ? data.length : 0;
 
     return (
-      <TouchableOpacity style={cardContainerStyle} onPress={onPressCard}>
+      <TouchableOpacity
+        style={cardContainerStyle}
+        onPress={() => {
+          onPressCard(index);
+        }}>
         <Text style={active ? activeStatusTextStyle : inActiveStatusTextStyle}>
           {active ? 'Active' : 'Hidden'}
         </Text>
@@ -64,7 +77,9 @@ const Menu = ({navigation}) => {
     );
   };
 
-  return (
+  return loading ? (
+    <ActivityIndicator />
+  ) : (
     <SafeAreaView style={containerStyle}>
       <FlatList
         style={{
@@ -72,7 +87,7 @@ const Menu = ({navigation}) => {
           margin: 10,
         }}
         showsVerticalScrollIndicator={false}
-        data={data}
+        data={menu || []}
         renderItem={RenderItem}
         keyExtractor={keyExtractor}
       />
@@ -84,9 +99,3 @@ const Menu = ({navigation}) => {
 };
 
 export default Menu;
-
-const data = [
-  {id: 0, title: 'Breakfast', active: true, data: [1, 2, 3, 4, 5, 6]},
-  {id: 1, title: 'Lunch', active: false, data: [1, 2, 3]},
-  {id: 2, title: 'Dinner', active: true, data: [1, 2, 3, 4, 5]},
-];
