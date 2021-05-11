@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {Button, CheckBoxLabel, TextInput} from '../../../components';
-import {styles} from './styles';
-
 import useUpdateMenu from '../../../hooks/useUpdateMenu';
+import {styles} from './styles';
 
 const {containerStyle, cardContainerStyle, buttonContainerStyle} = styles;
 

@@ -31,7 +31,28 @@ const useUpdateMenu = () => {
     setLoading(false);
   };
 
-  const onUpdateMenuSection = () => {};
+  const onUpdateMenuSection = async updatedMenuSectionItem => {
+    setLoading(true);
+    const menuCopy = menu && Array.isArray(menu) ? [...menu] : [];
+
+    const updatedMenu = menuCopy.map((item, index) => {
+      if (index === selectedMenuSectionIndex) {
+        return {...item, ...updatedMenuSectionItem};
+      }
+
+      return item;
+    });
+
+    try {
+      await userDocRef.update({menu: updatedMenu});
+      dispatch(setMenu(updatedMenu));
+      setSuccess(true);
+    } catch (error) {
+      setLoading(false);
+    }
+
+    setLoading(false);
+  };
 
   const onAddNewMenuItem = async newMenuItem => {
     setLoading(true);

@@ -39,8 +39,10 @@ const Menu = ({navigation}) => {
     navigation.navigate('add_menu_section');
   };
 
-  const onPressEditMenuSection = () => {
-    navigation.navigate('edit_menu_section');
+  const onPressEditMenuSection = (item, index) => {
+    navigation.navigate('edit_menu_section', {item});
+
+    dispatch(setSelectedMenuSectionIndex(index));
   };
 
   const keyExtractor = (item, index) => index.toString();
@@ -69,7 +71,7 @@ const Menu = ({navigation}) => {
           }}>
           <Text style={itemsCountTextStyle}>{`${itemsCount} Items`}</Text>
           <Text style={borderStyle}>|</Text>
-          <TouchableOpacity onPress={onPressEditMenuSection}>
+          <TouchableOpacity onPress={() => onPressEditMenuSection(item, index)}>
             <Text style={editButtonTextStyle}>EDIT</Text>
           </TouchableOpacity>
         </View>
