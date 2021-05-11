@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
-import {useSelector} from 'react-redux';
 import {Button, CheckBoxLabel, TextInput} from '../../../components';
 import {styles} from './styles';
+
+import useUpdateMenu from '../../../hooks/useUpdateMenu';
 
 const {containerStyle, cardContainerStyle, buttonContainerStyle} = styles;
 
 const EditMenuItem = ({navigation, route}) => {
   const {item} = route.params || {};
-  const {selectedMenuSectionIndex, selectedMenuItemIndex} = useSelector(
-    state => state.menu,
-  );
 
   const [title, setTitle] = useState();
   const [price, setPrice] = useState();
   const [description, setDescription] = useState();
   const [active, setStatus] = useState();
+
+  const {loading, success, onUpdateMenuItem} = useUpdateMenu();
 
   useEffect(() => {
     const {title, description, active, price} = item || {};
@@ -40,6 +40,19 @@ const EditMenuItem = ({navigation, route}) => {
 
   const onToggleStatus = () => {
     setStatus(!active);
+  };
+
+  const onPressSubmit = () => {
+    onUpdateMenuItem({
+      title,
+      price,
+      description,
+      active,
+    });
+  };
+
+  const onPressDone = () => {
+    navigation.goBack();
   };
 
   return (
@@ -68,7 +81,16 @@ const EditMenuItem = ({navigation, route}) => {
         />
       </View>
       <View style={buttonContainerStyle}>
-        <Button label="SUBMIT" />
+        {success ? (
+          <Button label="DONE" onPress={onPressDone} />
+        ) : (
+          <Button
+            label="SUBMIT"
+            onPress={onPressSubmit}
+            loading={loading}
+            disabled={loading ? true : false}
+          />
+        )}
       </View>
     </SafeAreaView>
   );

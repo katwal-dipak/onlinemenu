@@ -6,7 +6,9 @@ import {setMenu} from '../store/actions/menu';
 const useUpdateMenu = () => {
   const dispatch = useDispatch();
   const {firebaseAuthUserObj} = useSelector(state => state.user);
-  const {menu} = useSelector(state => state.menu);
+  const {menu, selectedMenuSectionIndex, selectedMenuItemIndex} = useSelector(
+    state => state.menu,
+  );
   const [loading, setLoading] = useState();
   const [success, setSuccess] = useState();
 
@@ -29,7 +31,40 @@ const useUpdateMenu = () => {
     setLoading(false);
   };
 
-  const onUpdateMenuSection = () => {};
+  const onUpdateMenuItem = async updatedMenuItem => {
+    setLoading(true);
+    const menuCopy = menu && Array.isArray(menu) ? [...menu] : [];
+
+    const updatedMenu = menuCopy.map((item, index) => {
+      if (index === selectedMenuSectionIndex) {
+        const {data: menuItems} = item || {};
+        let newMenuItems =
+          menuItems && Array.isArray(menuItems) ? [...menuItems] : [];
+
+        newMenuItems = newMenuItems.map((element, index) => {
+          if (index === selectedMenuItemIndex) {
+            return updatedMenuItem;
+          }
+
+          return element;
+        });
+
+        return {...item, data: newMenuItems};
+      }
+
+      return item;
+    });
+
+    try {
+      await userDocRef.update({menu: updatedMenu});
+      dispatch(setMenu(updatedMenu));
+      setSuccess(true);
+    } catch (error) {
+      setLoading(false);
+    }
+
+    setLoading(false);
+  };
 
   const onAddNewMenuItem = async (sectionIndex, newMenuItem) => {
     setLoading(true);
@@ -58,7 +93,7 @@ const useUpdateMenu = () => {
     setLoading(false);
   };
 
-  const onUpdateMenuItem = () => {};
+  const onUpdateMenuSection = () => {};
 
   return {
     loading,
