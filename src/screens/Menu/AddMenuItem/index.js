@@ -28,7 +28,7 @@ const AddMenuItem = ({navigation}) => {
   };
 
   const onPressSubmit = () => {
-    onAddNewMenuItem(selectedMenuSectionIndex, {
+    onAddNewMenuItem({
       title,
       price,
       description,
