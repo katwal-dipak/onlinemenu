@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {Button, Divider} from '../../../components';
 import {styles} from './styles';
+import {setSelectedMenuItemIndex} from '../../../store/actions/menu';
 
 const {
   containerStyle,
@@ -23,23 +24,24 @@ const {
 } = styles;
 
 const MenuItems = ({navigation}) => {
+  const dispatch = useDispatch();
   const {menu, selectedMenuSectionIndex} = useSelector(state => state.menu);
   const {data} =
     menu && Array.isArray(menu) ? menu[selectedMenuSectionIndex] : {};
 
   const onPressAddNewItem = () => {
-    navigation.navigate('add_menu_item', {
-      menuSectionIndex: selectedMenuSectionIndex,
-    });
+    navigation.navigate('add_menu_item');
   };
 
   const keyExtractor = (item, index) => index.toString();
 
-  const onPressEditMenuItem = () => {
-    navigation.navigate('edit_menu_item');
+  const onPressEditMenuItem = (index, item) => {
+    navigation.navigate('edit_menu_item', {item});
+
+    dispatch(setSelectedMenuItemIndex(index));
   };
 
-  const RenderItem = ({item}) => {
+  const RenderItem = ({item, index}) => {
     const {title, description, active, price} = item || {};
 
     return (
@@ -62,7 +64,7 @@ const MenuItems = ({navigation}) => {
           }}>
           <Text style={itemsCountTextStyle}>{price}</Text>
           <Text style={borderStyle}>|</Text>
-          <TouchableOpacity onPress={onPressEditMenuItem}>
+          <TouchableOpacity onPress={() => onPressEditMenuItem(index, item)}>
             <Text style={editButtonTextStyle}>EDIT</Text>
           </TouchableOpacity>
         </View>
