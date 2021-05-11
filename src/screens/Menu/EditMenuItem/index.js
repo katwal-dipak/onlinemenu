@@ -53,6 +53,8 @@ const EditMenuItem = ({navigation, route}) => {
           label="Description"
           value={description}
           onChangeText={onChangeDescription}
+          multiline
+          numberOfLines={8}
         />
         <View style={{marginTop: 10}} />
         <CheckBoxLabel
