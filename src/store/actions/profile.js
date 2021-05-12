@@ -8,6 +8,7 @@ export const SET_FACEBOOK_URL = 'SET_FACEBOOK_URL';
 export const SET_INSTAGRAM_URL = 'SET_INSTAGRAM_URL';
 export const SET_TWITTER_URL = 'SET_TWITTER_URL';
 export const SET_YOUTUBE_URL = 'SET_YOUTUBE_URL';
+export const SET_THEME = 'SET_THEME';
 export const RESET_PROFILE_DATA = 'RESET_PROFILE_DATA';
 
 export const setPreviousProfileData = payload => ({
@@ -57,6 +58,11 @@ export const setTwitterURL = payload => ({
 
 export const setYoutubeURL = payload => ({
   type: SET_YOUTUBE_URL,
+  payload,
+});
+
+export const setTheme = payload => ({
+  type: SET_THEME,
   payload,
 });
 

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {Button as RNEButton} from 'react-native-elements';
-import {Theme} from '../../styles/colors';
+import {Theme, Components} from '../../styles/colors';
 import {TextStyles} from '../../styles/text';
 import {styles} from './styles';
 
@@ -42,7 +42,7 @@ const Button = ({
       containerStyle={containerStyle}
       loading={loading}
       loadingStyle={{marginVertical: 7}}
-      loadingProps={{color: Theme.PrimaryColor}}
+      loadingProps={{color: Components.Background.core}}
     />
   );
 };
