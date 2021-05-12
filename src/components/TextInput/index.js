@@ -4,7 +4,14 @@ import {TextInput as MaterialTextInput} from 'react-native-paper';
 import {Components} from '../../styles/colors';
 import {TextStyles} from '../../styles/text';
 
-const TextInput = ({label, value, onChangeText, placeholder}) => {
+const TextInput = ({
+  label,
+  value,
+  onChangeText,
+  placeholder,
+  multiline,
+  numberOfLines,
+}) => {
   return (
     <MaterialTextInput
       label={label}
@@ -27,6 +34,8 @@ const TextInput = ({label, value, onChangeText, placeholder}) => {
       }}
       autoCorrect={false}
       autoCapitalize="none"
+      multiline={multiline}
+      numberOfLines={numberOfLines}
     />
   );
 };
@@ -36,6 +45,8 @@ TextInput.propTypes = {
   value: PropTypes.string,
   placeholder: PropTypes.string,
   onChangeText: PropTypes.func,
+  multiline: PropTypes.bool,
+  numberOfLines: PropTypes.number,
 };
 
 TextInput.defaultProps = {
@@ -43,6 +54,8 @@ TextInput.defaultProps = {
   value: '',
   placeholder: '',
   onChangeText: () => {},
+  multiline: false,
+  numberOfLines: 1,
 };
 
 export default TextInput;

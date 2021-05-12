@@ -6,12 +6,15 @@ import {TextStyles} from '../../styles/text';
 export const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
-    backgroundColor: Components.Background.core,
   },
   formContainerStyle: {
     flex: 1,
-    //  backgroundColor: Components.Background.core,
+  },
+  cardContainerStyle: {
+    borderRadius: 3,
     padding: 15,
+    margin: 10,
+    backgroundColor: Components.Background.core,
   },
   buttonContainerStyle: {
     paddingHorizontal: 25,
@@ -21,7 +24,8 @@ export const styles = StyleSheet.create({
   },
   titleTextStyle: {
     ...TextStyles.H1SemiBold,
-    marginTop: 30,
+    marginTop: 10,
+    marginHorizontal: 10,
     fontSize: 20,
   },
 });

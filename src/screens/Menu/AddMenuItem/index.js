@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
+import {useSelector} from 'react-redux';
 import {Button, TextInput} from '../../../components';
 import useUpdateMenu from '../../../hooks/useUpdateMenu';
 import {styles} from './styles';
 
 const {containerStyle, cardContainerStyle, buttonContainerStyle} = styles;
 
-const AddMenuItem = ({navigation, route}) => {
-  const {menuSectionIndex} = route.params || {};
+const AddMenuItem = ({navigation}) => {
+  const {selectedMenuSectionIndex} = useSelector(state => state.menu);
+
   const [title, setTitle] = useState();
   const [price, setPrice] = useState();
   const [description, setDescription] = useState();
@@ -26,7 +28,7 @@ const AddMenuItem = ({navigation, route}) => {
   };
 
   const onPressSubmit = () => {
-    onAddNewMenuItem(menuSectionIndex, {
+    onAddNewMenuItem({
       title,
       price,
       description,

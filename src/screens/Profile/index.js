@@ -8,6 +8,7 @@ import useProfileForm from './useProfileForm';
 const {
   containerStyle,
   formContainerStyle,
+  cardContainerStyle,
   buttonContainerStyle,
   titleTextStyle,
 } = styles;
@@ -45,64 +46,83 @@ const Profile = ({navigation}) => {
         <ScrollView
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}>
-          <TextInput
-            label="Name"
-            placeholder="Business name"
-            value={name}
-            onChangeText={onChangeName}
-          />
-          <Spacer />
-          <TextInput
-            label="Address"
-            placeholder="Enter full address"
-            value={address}
-            onChangeYoutubeURL={onChangeAddress}
-          />
+          <View style={cardContainerStyle}>
+            <TextInput
+              label="Name"
+              placeholder="Business name"
+              value={name}
+              onChangeText={onChangeName}
+            />
+            <Spacer />
+            <TextInput
+              label="Address"
+              placeholder="Enter full address"
+              value={address}
+              onChangeYoutubeURL={onChangeAddress}
+            />
+          </View>
 
           <Text style={titleTextStyle}>Contact</Text>
           <Spacer />
-          <TextInput label="Email" value={email} onChangeText={onChangeEmail} />
-          <Spacer />
-          <TextInput
-            label="Phone Number 1"
-            value={phone1}
-            onChangeText={onChangePhone1}
-          />
-          <Spacer />
-          <TextInput
-            label="Phone Number 2"
-            value={phone2}
-            onChangeText={onChangePhone2}
-          />
+          <View style={cardContainerStyle}>
+            <TextInput
+              label="Email"
+              value={email}
+              onChangeText={onChangeEmail}
+            />
+            <Spacer />
+            <TextInput
+              label="Phone Number 1"
+              value={phone1}
+              onChangeText={onChangePhone1}
+            />
+            <Spacer />
+            <TextInput
+              label="Phone Number 2"
+              value={phone2}
+              onChangeText={onChangePhone2}
+            />
+          </View>
+
           <Spacer />
 
           <Text style={titleTextStyle}>Social Media</Text>
           <Spacer />
-          <TextInput
-            label="Facebook"
-            value={facebookURL}
-            onChangeText={onChangeFacebookURL}
-          />
-          <Spacer />
-          <TextInput
-            label="Instagram"
-            placeholder="https://www.instagram.com"
-            value={instagramURL}
-            onChangeText={onChangeInstagramURL}
-          />
-          <Spacer />
-          <TextInput
-            label="Twitter"
-            value={twitterURL}
-            onChangeText={onChangeTwitterURL}
-          />
-          <Spacer />
-          <TextInput
-            label="Youtube"
-            placeholder="Youtube channel URL"
-            value={youtubeURL}
-            onChangeText={onChangeYoutubeURL}
-          />
+          <View style={cardContainerStyle}>
+            <TextInput
+              label="Facebook"
+              value={facebookURL}
+              onChangeText={onChangeFacebookURL}
+              multiline
+              numberOfLines={3}
+            />
+            <Spacer />
+            <TextInput
+              label="Instagram"
+              placeholder="https://www.instagram.com"
+              value={instagramURL}
+              onChangeText={onChangeInstagramURL}
+              multiline
+              numberOfLines={3}
+            />
+            <Spacer />
+            <TextInput
+              label="Twitter"
+              value={twitterURL}
+              onChangeText={onChangeTwitterURL}
+              multiline
+              numberOfLines={3}
+            />
+            <Spacer />
+            <TextInput
+              label="Youtube"
+              placeholder="Youtube channel URL"
+              value={youtubeURL}
+              onChangeText={onChangeYoutubeURL}
+              multiline
+              numberOfLines={3}
+            />
+          </View>
         </ScrollView>
       </View>
       <View style={buttonContainerStyle}>
