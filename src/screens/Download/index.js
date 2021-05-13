@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import RNFS from 'react-native-fs';
 import QRCode from 'react-native-qrcode-svg';
+import Clipboard from '@react-native-clipboard/clipboard';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
 import {Button} from '../../components';
@@ -62,12 +63,16 @@ const Download = () => {
     return status === 'granted';
   };
 
+  const copyToClipboard = () => {
+    Clipboard.setString(`https://onlinemenu.today/users/${uid}`);
+  };
+
   return (
     <SafeAreaView style={containerStyle}>
       <ScrollView style={{flex: 1 / 3, margin: 25}}>
         <QRCode
           getRef={ref => (myQRCode = ref)}
-          value="https://sangalocosmetics.com/"
+          value={`https://onlinemenu.today/users/${uid}`}
           size={1024}
         />
       </ScrollView>
@@ -79,7 +84,11 @@ const Download = () => {
           style={
             profileURLTextStyle
           }>{`https://onlinemenu.today/users/${uid}`}</Text>
-        <MaterialCommunityIcons name="content-copy" size={25} />
+        <MaterialCommunityIcons
+          name="content-copy"
+          size={25}
+          onPress={copyToClipboard}
+        />
       </View>
 
       <View style={buttonContainerStyle}>
