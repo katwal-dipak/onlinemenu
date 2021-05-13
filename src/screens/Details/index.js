@@ -2,17 +2,19 @@ import CameraRoll from '@react-native-community/cameraroll';
 import React, {useRef} from 'react';
 import {
   Image,
+  Linking,
   Modal,
   PermissionsAndroid,
   Platform,
+  Text,
   ToastAndroid,
   View,
-  Text,
-  Linking,
 } from 'react-native';
 import RNFS from 'react-native-fs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
 import {Button} from '../../components';
+import useApplyTheme from '../../hooks/useApplyTheme';
 import styles from './styles';
 
 const {
@@ -24,7 +26,10 @@ const {
 } = styles;
 
 const Details = ({item, visible, toggle}) => {
-  const {imageURL} = item || {};
+  const {id, price, imageURL, plan} = item || {};
+  const {themeId} = useSelector(state => state.profile);
+
+  const {loading, onApplyTheme} = useApplyTheme();
 
   let myQRCode = useRef();
 
@@ -76,6 +81,10 @@ const Details = ({item, visible, toggle}) => {
     });
   };
 
+  const onPressApplyTheme = () => {
+    onApplyTheme(id);
+  };
+
   return (
     <Modal
       visible={visible}
@@ -94,14 +103,15 @@ const Details = ({item, visible, toggle}) => {
           />
           <View
             style={{flexDirection: 'row', alignItems: 'baseline', padding: 15}}>
-            <Text style={titleTextStyle}>$ 0.99</Text>
-            <Text style={previewTextStyle}>Per Month</Text>
+            <Text style={titleTextStyle}>{price}</Text>
+            <Text style={previewTextStyle}>{plan > 1 ? `Per Month` : ''}</Text>
           </View>
           <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
             <Button
-              label="UPGRADE PLAN TO APPLY"
+              label={id === themeId ? 'ACTIVE THEME' : 'APPLY THEME'}
               containerStyle={{paddingHorizontal: 15, flex: 1}}
-              onPress={onPressUpgradePlan}
+              onPress={id === themeId ? () => {} : onPressApplyTheme}
+              loading={loading}
             />
             <View style={{alignItems: 'center', paddingHorizontal: 15}}>
               <Ionicons

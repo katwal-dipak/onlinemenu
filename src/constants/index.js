@@ -10,6 +10,6 @@ export const FIRESTORE_PAGINATION_SIZE = 15;
 
 export const FIRESTORE_COLLECTION = {
   MERCHANTS: firestore().collection('merchants'),
-  TEMPLATES: firestore().collection('templates'),
+  TEMPLATES: firestore().collection('themes'),
   USERS: firestore().collection('users'),
 };

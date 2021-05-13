@@ -9,6 +9,7 @@ import {
   SET_INSTAGRAM_URL,
   SET_TWITTER_URL,
   SET_YOUTUBE_URL,
+  SET_THEME,
   RESET_PROFILE_DATA,
 } from '../actions/profile';
 
@@ -23,6 +24,7 @@ const initialState = {
   instagramURL: null,
   twitterURL: null,
   youtubeURL: null,
+  themeId: null,
 };
 
 export default (state = initialState, action) => {
@@ -40,6 +42,7 @@ export default (state = initialState, action) => {
         instagramURL,
         twitterURL,
         youtubeURL,
+        themeId,
       } = payload || {};
 
       return {
@@ -54,6 +57,7 @@ export default (state = initialState, action) => {
         instagramURL,
         twitterURL,
         youtubeURL,
+        themeId,
       };
 
     case SET_NAME:
@@ -108,6 +112,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         youtubeURL: payload,
+      };
+
+    case SET_THEME:
+      return {
+        ...state,
+        themeId: payload,
       };
 
     case RESET_PROFILE_DATA:
