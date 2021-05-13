@@ -5,17 +5,29 @@ import {
   Platform,
   SafeAreaView,
   ScrollView,
+  Text,
   ToastAndroid,
   View,
 } from 'react-native';
 import RNFS from 'react-native-fs';
 import QRCode from 'react-native-qrcode-svg';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useSelector} from 'react-redux';
 import {Button} from '../../components';
 import {styles} from './styles';
 
-const {containerStyle, buttonContainerStyle} = styles;
+const {
+  containerStyle,
+  buttonContainerStyle,
+  profileURLContainerStyle,
+  profileURLTextStyle,
+  titleTextStyle,
+} = styles;
 
 const Download = () => {
+  const {firebaseAuthUserObj} = useSelector(state => state.user);
+  const {uid} = firebaseAuthUserObj || {};
+
   let myQRCode = useRef();
 
   const saveQrToDisk = async () => {
@@ -52,16 +64,26 @@ const Download = () => {
 
   return (
     <SafeAreaView style={containerStyle}>
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{flex: 1 / 3, margin: 25}}>
         <QRCode
           getRef={ref => (myQRCode = ref)}
           value="https://sangalocosmetics.com/"
-          size={512}
+          size={1024}
         />
       </ScrollView>
+      <View style={{marginHorizontal: 20, marginTop: 25}}>
+        <Text style={titleTextStyle}>Your Profile URL</Text>
+      </View>
+      <View style={profileURLContainerStyle}>
+        <Text
+          style={
+            profileURLTextStyle
+          }>{`https://onlinemenu.today/users/${uid}`}</Text>
+        <MaterialCommunityIcons name="content-copy" size={25} />
+      </View>
 
       <View style={buttonContainerStyle}>
-        <Button label="DOWNLOAD" onPress={saveQrToDisk} />
+        <Button label="DOWNLOAD QR CODE" onPress={saveQrToDisk} />
       </View>
     </SafeAreaView>
   );
