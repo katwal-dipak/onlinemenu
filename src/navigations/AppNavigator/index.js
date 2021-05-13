@@ -15,6 +15,7 @@ import AddMenuItem from '../../screens/Menu/AddMenuItem';
 import EditMenuItem from '../../screens/Menu/EditMenuItem';
 import AddSection from '../../screens/Menu/AddSection';
 import EditSection from '../../screens/Menu/EditSection';
+import Download from '../../screens/Download';
 
 import {TextStyles} from '../../styles/text';
 
@@ -107,6 +108,12 @@ const AppNavigator = () => {
           name="edit_menu_section"
           component={EditSection}
           options={{headerTitle: 'Edit Section'}}
+        />
+
+        <Stack.Screen
+          name="download"
+          component={Download}
+          options={{headerTitle: 'QR Code'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

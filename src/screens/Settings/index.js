@@ -102,6 +102,17 @@ const Settings = ({navigation}) => {
           <View>
             <RowDivider />
             <RowItem
+              label="QR Code"
+              onPress={() => navigation.navigate('download')}
+            />
+          </View>
+        ) : (
+          <View />
+        )}
+        {uid ? (
+          <View>
+            <RowDivider />
+            <RowItem
               label="Sign Out"
               onPress={loading ? null : onPressLogout}
             />
