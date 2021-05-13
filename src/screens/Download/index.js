@@ -65,6 +65,7 @@ const Download = () => {
 
   const copyToClipboard = () => {
     Clipboard.setString(`https://onlinemenu.today/users/${uid}`);
+    ToastAndroid.show('Copied', ToastAndroid.SHORT);
   };
 
   return (
