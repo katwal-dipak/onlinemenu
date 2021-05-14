@@ -28,7 +28,7 @@ const Settings = ({navigation}) => {
 
   const onPressShare = () => {
     const shareOptions = {
-      title: 'Sangalo',
+      title: 'Online Menu',
       message: `${GOOGLE_PLAY_URL} \n \n ${APP_STORE_URL}`,
     };
 
@@ -91,9 +91,6 @@ const Settings = ({navigation}) => {
             navigation.navigate('menu');
           }}
         />
-        <RowDivider />
-        <RowItem label="Subscription" onPress={onPressManageSubscription} />
-
         <RowDivider />
         <RowItem label="Share" onPress={onPressShare} />
         <RowDivider />
