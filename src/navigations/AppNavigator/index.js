@@ -54,7 +54,12 @@ const AppNavigator = () => {
         <Stack.Screen
           name="profile"
           component={Profile}
-          options={{headerTitle: 'Profile'}}
+          options={{
+            headerTitle: 'Profile',
+            headerTitleStyle: styles.titleTextStyle,
+            headerBackTitle: '',
+            headerTintColor: Components.Button,
+          }}
         />
 
         <Stack.Screen

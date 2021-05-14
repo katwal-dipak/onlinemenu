@@ -1,7 +1,6 @@
 import React from 'react';
 import {Linking, Platform, SafeAreaView, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
-
 import {Divider} from '../../components';
 import useAuthentication from '../../hooks/useAuthentication';
 import {Components} from '../../styles/colors';
@@ -91,10 +90,7 @@ const Settings = ({navigation}) => {
             navigation.navigate('menu');
           }}
         />
-        <RowDivider />
-        <RowItem label="Share" onPress={onPressShare} />
-        <RowDivider />
-        <RowItem label="Feedbacks" onPress={onPressRateSangalo} />
+
         {uid ? (
           <View>
             <RowDivider />
@@ -106,6 +102,11 @@ const Settings = ({navigation}) => {
         ) : (
           <View />
         )}
+        <RowDivider />
+        <RowItem label="Share" onPress={onPressShare} />
+        <RowDivider />
+        <RowItem label="Feedbacks" onPress={onPressRateSangalo} />
+
         {uid ? (
           <View>
             <RowDivider />
