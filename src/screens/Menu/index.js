@@ -94,7 +94,7 @@ const Menu = ({navigation}) => {
         keyExtractor={keyExtractor}
       />
       <View style={buttonContainerStyle}>
-        <Button label="ADD NEW SECTION" onPress={onPressAddMenuSection} />
+        <Button label="ADD NEW CATEGORY" onPress={onPressAddMenuSection} />
       </View>
     </SafeAreaView>
   );
