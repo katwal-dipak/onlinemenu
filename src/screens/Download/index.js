@@ -78,7 +78,7 @@ const Download = () => {
         />
       </ScrollView>
       <View style={{marginHorizontal: 20, marginTop: 25}}>
-        <Text style={titleTextStyle}>Your Profile URL</Text>
+        <Text style={titleTextStyle}>Your Menu URL</Text>
       </View>
       <View style={profileURLContainerStyle}>
         <Text
