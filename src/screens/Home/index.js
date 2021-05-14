@@ -4,7 +4,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ActivityIndicator, MenuCard} from '../../components';
 import useFetchTemplates from '../../hooks/useFetchTemplates';
 import {Components} from '../../styles/colors';
-
 import Details from '../Details';
 
 const Home = ({navigation}) => {
@@ -30,8 +29,8 @@ const Home = ({navigation}) => {
             navigation.navigate('settings');
           }}>
           <Ionicons
-            name="person-circle-outline"
-            size={30}
+            name="person-outline"
+            size={25}
             color={Components.Button}
             style={{paddingHorizontal: 10}}
           />
@@ -72,7 +71,7 @@ const Home = ({navigation}) => {
   return loading ? (
     <ActivityIndicator />
   ) : (
-    <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+    <View style={{flex: 1, backgroundColor: Components.Background.core}}>
       <FlatList
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

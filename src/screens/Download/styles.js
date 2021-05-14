@@ -1,19 +1,10 @@
 import {StyleSheet} from 'react-native';
-
 import {Components} from '../../styles/colors';
 import {TextStyles} from '../../styles/text';
 
 export const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
-  },
-  formContainerStyle: {
-    flex: 1,
-  },
-  cardContainerStyle: {
-    borderRadius: 3,
-    padding: 15,
-    margin: 10,
     backgroundColor: Components.Background.core,
   },
   buttonContainerStyle: {
@@ -22,10 +13,19 @@ export const styles = StyleSheet.create({
     borderTopColor: Components.Border,
     borderTopWidth: 1,
   },
+  profileURLContainerStyle: {
+    backgroundColor: Components.Background.tint75Percent,
+    padding: 10,
+    margin: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   titleTextStyle: {
-    ...TextStyles.H1SemiBold,
-    marginTop: 10,
-    marginHorizontal: 10,
-    fontSize: 20,
+    ...TextStyles.H2SemiBold,
+    fontSize: 16,
+  },
+  profileURLTextStyle: {
+    ...TextStyles.H1Regular,
   },
 });

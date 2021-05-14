@@ -1,7 +1,6 @@
 import React from 'react';
 import {Linking, Platform, SafeAreaView, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
-
 import {Divider} from '../../components';
 import useAuthentication from '../../hooks/useAuthentication';
 import {Components} from '../../styles/colors';
@@ -28,7 +27,7 @@ const Settings = ({navigation}) => {
 
   const onPressShare = () => {
     const shareOptions = {
-      title: 'Sangalo',
+      title: 'Online Menu',
       message: `${GOOGLE_PLAY_URL} \n \n ${APP_STORE_URL}`,
     };
 
@@ -41,7 +40,7 @@ const Settings = ({navigation}) => {
       });
   };
 
-  const onPressRateSangalo = () => {
+  const onPressFeedbacks = () => {
     let URL = GOOGLE_PLAY_URL;
 
     if (Platform.OS === 'ios') {
@@ -91,13 +90,23 @@ const Settings = ({navigation}) => {
             navigation.navigate('menu');
           }}
         />
-        <RowDivider />
-        <RowItem label="Subscription" onPress={onPressManageSubscription} />
 
+        {uid ? (
+          <View>
+            <RowDivider />
+            <RowItem
+              label="QR Code"
+              onPress={() => navigation.navigate('download')}
+            />
+          </View>
+        ) : (
+          <View />
+        )}
         <RowDivider />
         <RowItem label="Share" onPress={onPressShare} />
         <RowDivider />
-        <RowItem label="Feedbacks" onPress={onPressRateSangalo} />
+        <RowItem label="Feedbacks" onPress={onPressFeedbacks} />
+
         {uid ? (
           <View>
             <RowDivider />

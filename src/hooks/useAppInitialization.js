@@ -1,11 +1,12 @@
+import auth from '@react-native-firebase/auth';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import auth from '@react-native-firebase/auth';
-
-import {setFirebaseAuthUserObj, clearUserData} from '../store/actions/user';
+import useFetchUserProfile from '../hooks/useFetchUserProfile';
+import {clearUserData, setFirebaseAuthUserObj} from '../store/actions/user';
 
 const useAppInitialization = () => {
   const dispatch = useDispatch();
+  const {loading, error, onRetry} = useFetchUserProfile();
 
   const onAuthStateChanged = user => {
     if (user) {
@@ -20,7 +21,7 @@ const useAppInitialization = () => {
     return subscriber;
   }, []);
 
-  return {};
+  return {loading, error, onRetry};
 };
 
 export default useAppInitialization;
