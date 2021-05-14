@@ -19,7 +19,7 @@ const useFetchUserProfile = () => {
     }
 
     fetchDataFromServer();
-  }, []);
+  }, [uid]);
 
   const fetchData = async () => {
     if (uid) {

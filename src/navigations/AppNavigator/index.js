@@ -4,19 +4,18 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import useAppInitialization from '../../hooks/useAppInitialization';
 import Details from '../../screens/Details';
+import Download from '../../screens/Download';
 import Home from '../../screens/Home';
 import Login from '../../screens/Login';
-import Pricing from '../../screens/Pricing';
-import Settings from '../../screens/Settings';
-import Profile from '../../screens/Profile';
 import Menu from '../../screens/Menu';
-import MenuItems from '../../screens/Menu/MenuItems';
 import AddMenuItem from '../../screens/Menu/AddMenuItem';
-import EditMenuItem from '../../screens/Menu/EditMenuItem';
 import AddSection from '../../screens/Menu/AddSection';
+import EditMenuItem from '../../screens/Menu/EditMenuItem';
 import EditSection from '../../screens/Menu/EditSection';
-import Download from '../../screens/Download';
-
+import MenuItems from '../../screens/Menu/MenuItems';
+import Pricing from '../../screens/Pricing';
+import Profile from '../../screens/Profile';
+import Settings from '../../screens/Settings';
 import {TextStyles} from '../../styles/text';
 
 const Stack = createStackNavigator();
