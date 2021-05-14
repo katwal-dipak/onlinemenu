@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   },
   buttonContainerStyle: {
     paddingHorizontal: 25,
-    paddingTop: 15,
+    paddingVertical: 15,
     borderTopColor: Components.Border,
     borderTopWidth: 1,
   },
