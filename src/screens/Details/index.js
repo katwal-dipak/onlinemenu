@@ -1,20 +1,10 @@
-import CameraRoll from '@react-native-community/cameraroll';
-import React, {useRef} from 'react';
-import {
-  Image,
-  Linking,
-  Modal,
-  PermissionsAndroid,
-  Platform,
-  Text,
-  ToastAndroid,
-  View,
-} from 'react-native';
-import RNFS from 'react-native-fs';
+import React from 'react';
+import {Image, Linking, Modal, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
 import {Button} from '../../components';
 import useApplyTheme from '../../hooks/useApplyTheme';
+import {Theme} from '../../styles/colors';
 import styles from './styles';
 
 const {
@@ -28,38 +18,9 @@ const {
 const Details = ({item, visible, toggle}) => {
   const {id, price, imageURL, plan} = item || {};
   const {themeId} = useSelector(state => state.profile);
-
   const {loading, onApplyTheme} = useApplyTheme();
 
-  let myQRCode = useRef();
-
-  const saveQrToDisk = async () => {
-    if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
-      return;
-    }
-
-    myQRCode.toDataURL(data => {
-      RNFS.writeFile(RNFS.CachesDirectoryPath + '/menu.png', data, 'base64')
-        .then(success => {
-          return CameraRoll.save(RNFS.CachesDirectoryPath + '/menu.png');
-        })
-        .then(() => {
-          ToastAndroid.show('Saved to gallery !!', ToastAndroid.SHORT);
-        });
-    });
-  };
-
-  const hasAndroidPermission = async () => {
-    const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
-
-    const hasPermission = await PermissionsAndroid.check(permission);
-    if (hasPermission) {
-      return true;
-    }
-
-    const status = await PermissionsAndroid.request(permission);
-    return status === 'granted';
-  };
+  const isActiveTheme = id === themeId;
 
   const onPressPreview = () => {
     const URL = 'https://onlinemenu.today/template2';
@@ -71,7 +32,7 @@ const Details = ({item, visible, toggle}) => {
     });
   };
 
-  const onPressUpgradePlan = () => {
+  /*const onPressUpgradePlan = () => {
     const URL = 'https://onlinemenu.today';
 
     Linking.canOpenURL(URL).then(supported => {
@@ -79,7 +40,7 @@ const Details = ({item, visible, toggle}) => {
         Linking.openURL(URL);
       }
     });
-  };
+  };*/
 
   const onPressApplyTheme = () => {
     onApplyTheme(id);
@@ -108,10 +69,14 @@ const Details = ({item, visible, toggle}) => {
           </View>
           <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
             <Button
-              label={id === themeId ? 'ACTIVE THEME' : 'APPLY THEME'}
-              containerStyle={{paddingHorizontal: 15, flex: 1}}
-              onPress={id === themeId ? () => {} : onPressApplyTheme}
+              label={isActiveTheme ? 'CURRENTLY ACTIVE' : 'APPLY THEME'}
+              containerStyle={{
+                paddingHorizontal: 15,
+                flex: 1,
+              }}
+              onPress={isActiveTheme ? () => {} : onPressApplyTheme}
               loading={loading}
+              color={isActiveTheme ? Theme.SecondaryColor : null}
             />
             <View style={{alignItems: 'center', paddingHorizontal: 15}}>
               <Ionicons
@@ -132,10 +97,3 @@ const Details = ({item, visible, toggle}) => {
 };
 
 export default Details;
-/**
- *     <QRCode
-        getRef={ref => (myQRCode = ref)}
-        value="https://sangalocosmetics.com/"
-        size={300}
-      />
- */
