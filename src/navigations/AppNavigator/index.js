@@ -3,10 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import useAppInitialization from '../../hooks/useAppInitialization';
-import Details from '../../screens/Details';
 import Download from '../../screens/Download';
 import Home from '../../screens/Home';
-import Login from '../../screens/Login';
 import Menu from '../../screens/Menu';
 import AddMenuItem from '../../screens/Menu/AddMenuItem';
 import AddSection from '../../screens/Menu/AddSection';
@@ -16,6 +14,7 @@ import MenuItems from '../../screens/Menu/MenuItems';
 import Pricing from '../../screens/Pricing';
 import Profile from '../../screens/Profile';
 import Settings from '../../screens/Settings';
+import {Components} from '../../styles/colors';
 import {TextStyles} from '../../styles/text';
 
 const Stack = createStackNavigator();
@@ -36,28 +35,13 @@ const AppNavigator = () => {
         />
 
         <Stack.Screen
-          name="login"
-          component={Login}
-          options={{headerTitle: 'Login'}}
-        />
-
-        <Stack.Screen
-          name="details"
-          component={Details}
-          options={{
-            headerTitle: 'Details',
-            headerBackTitle: '',
-            headerTitleStyle: styles.titleTextStyle,
-          }}
-        />
-
-        <Stack.Screen
           name="settings"
           component={Settings}
           options={{
             headerTitle: 'Settings',
-            headerBackTitle: '',
             headerTitleStyle: styles.titleTextStyle,
+            headerBackTitle: '',
+            headerTintColor: Components.Button,
           }}
         />
 
@@ -76,43 +60,78 @@ const AppNavigator = () => {
         <Stack.Screen
           name="menu"
           component={Menu}
-          options={{headerTitle: 'Menu'}}
+          options={{
+            headerTitle: 'Menu',
+            headerTitleStyle: styles.titleTextStyle,
+            headerBackTitle: '',
+            headerTintColor: Components.Button,
+          }}
         />
 
         <Stack.Screen
           name="menu_items"
           component={MenuItems}
-          options={{headerTitle: 'Menu Items'}}
+          options={{
+            headerTitle: 'Menu Items',
+            headerTitleStyle: styles.titleTextStyle,
+            headerBackTitle: '',
+            headerTintColor: Components.Button,
+          }}
         />
 
         <Stack.Screen
           name="add_menu_item"
           component={AddMenuItem}
-          options={{headerTitle: 'Add Menu Item'}}
+          options={{
+            headerTitle: 'Add Menu Item',
+            headerTitleStyle: styles.titleTextStyle,
+            headerBackTitle: '',
+            headerTintColor: Components.Button,
+          }}
         />
 
         <Stack.Screen
           name="edit_menu_item"
           component={EditMenuItem}
-          options={{headerTitle: 'Edit Menu Item'}}
+          options={{
+            headerTitle: 'Edit Menu Item',
+            headerTitleStyle: styles.titleTextStyle,
+            headerBackTitle: '',
+            headerTintColor: Components.Button,
+          }}
         />
 
         <Stack.Screen
           name="add_menu_section"
           component={AddSection}
-          options={{headerTitle: 'Add Section'}}
+          options={{
+            headerTitle: 'Add Category',
+            headerTitleStyle: styles.titleTextStyle,
+            headerBackTitle: '',
+            headerTintColor: Components.Button,
+          }}
         />
 
         <Stack.Screen
           name="edit_menu_section"
           component={EditSection}
-          options={{headerTitle: 'Edit Section'}}
+          options={{
+            headerTitle: 'Edit Category',
+            headerTitleStyle: styles.titleTextStyle,
+            headerBackTitle: '',
+            headerTintColor: Components.Button,
+          }}
         />
 
         <Stack.Screen
           name="download"
           component={Download}
-          options={{headerTitle: 'QR Code'}}
+          options={{
+            headerTitle: 'QR Code',
+            headerTitleStyle: styles.titleTextStyle,
+            headerBackTitle: '',
+            headerTintColor: Components.Button,
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
