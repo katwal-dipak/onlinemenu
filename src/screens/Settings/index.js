@@ -40,7 +40,7 @@ const Settings = ({navigation}) => {
       });
   };
 
-  const onPressRateSangalo = () => {
+  const onPressFeedbacks = () => {
     let URL = GOOGLE_PLAY_URL;
 
     if (Platform.OS === 'ios') {
@@ -105,7 +105,7 @@ const Settings = ({navigation}) => {
         <RowDivider />
         <RowItem label="Share" onPress={onPressShare} />
         <RowDivider />
-        <RowItem label="Feedbacks" onPress={onPressRateSangalo} />
+        <RowItem label="Feedbacks" onPress={onPressFeedbacks} />
 
         {uid ? (
           <View>
