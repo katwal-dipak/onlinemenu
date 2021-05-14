@@ -1,3 +1,4 @@
+import Clipboard from '@react-native-clipboard/clipboard';
 import CameraRoll from '@react-native-community/cameraroll';
 import React, {useRef} from 'react';
 import {
@@ -11,7 +12,6 @@ import {
 } from 'react-native';
 import RNFS from 'react-native-fs';
 import QRCode from 'react-native-qrcode-svg';
-import Clipboard from '@react-native-clipboard/clipboard';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
 import {Button} from '../../components';
@@ -47,7 +47,7 @@ const Download = () => {
           });
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -64,7 +64,7 @@ const Download = () => {
   };
 
   const copyToClipboard = () => {
-    Clipboard.setString(`https://onlinemenu.today/users/${uid}`);
+    Clipboard.setString(`https://onlinemenu.today/menu/${uid}`);
     ToastAndroid.show('Copied', ToastAndroid.SHORT);
   };
 
@@ -73,7 +73,7 @@ const Download = () => {
       <ScrollView style={{flex: 1 / 3, margin: 25}}>
         <QRCode
           getRef={ref => (myQRCode = ref)}
-          value={`https://onlinemenu.today/users/${uid}`}
+          value={`https://onlinemenu.today/menu/${uid}`}
           size={1024}
         />
       </ScrollView>
@@ -84,7 +84,7 @@ const Download = () => {
         <Text
           style={
             profileURLTextStyle
-          }>{`https://onlinemenu.today/users/${uid}`}</Text>
+          }>{`https://onlinemenu.today/menu/${uid}`}</Text>
         <MaterialCommunityIcons
           name="content-copy"
           size={25}
