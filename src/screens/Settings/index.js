@@ -1,5 +1,6 @@
 import React from 'react';
 import {Linking, Platform, SafeAreaView, Text, View} from 'react-native';
+import Share from 'react-native-share';
 import {useSelector} from 'react-redux';
 import {Divider} from '../../components';
 import useAuthentication from '../../hooks/useAuthentication';
