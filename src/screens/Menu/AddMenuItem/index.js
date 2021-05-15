@@ -40,6 +40,21 @@ const AddMenuItem = ({navigation}) => {
     navigation.goBack();
   };
 
+  const RenderSubmitButton = () => {
+    const trimmedTitle = title && title.trim();
+    const trimmedPrice = price && price.trim();
+
+    if (success) {
+      return <Button label="DONE" onPress={onPressDone} />;
+    }
+
+    if (!trimmedTitle || !trimmedPrice) {
+      return <Button label="SUBMIT" disabled />;
+    }
+
+    return <Button label="SUBMIT" onPress={onPressSubmit} loading={loading} />;
+  };
+
   return (
     <SafeAreaView style={containerStyle}>
       <View style={cardContainerStyle}>
@@ -54,16 +69,7 @@ const AddMenuItem = ({navigation}) => {
         />
       </View>
       <View style={buttonContainerStyle}>
-        {success ? (
-          <Button label="DONE" onPress={onPressDone} />
-        ) : (
-          <Button
-            label="SUBMIT"
-            onPress={onPressSubmit}
-            loading={loading}
-            disabled={loading ? true : false}
-          />
-        )}
+        <RenderSubmitButton />
       </View>
     </SafeAreaView>
   );

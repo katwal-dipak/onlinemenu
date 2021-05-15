@@ -65,12 +65,7 @@ const EditSection = ({navigation, route}) => {
         {success ? (
           <Button label="DONE" onPress={onPressDone} />
         ) : (
-          <Button
-            label="SUBMIT"
-            onPress={onPressSubmit}
-            loading={loading}
-            disabled={loading ? true : false}
-          />
+          <Button label="SUBMIT" onPress={onPressSubmit} loading={loading} />
         )}
       </View>
     </SafeAreaView>
