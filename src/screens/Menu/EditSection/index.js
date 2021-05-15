@@ -40,6 +40,20 @@ const EditSection = ({navigation, route}) => {
     navigation.goBack();
   };
 
+  const RenderSubmitButton = () => {
+    const trimmedTitle = title && title.trim();
+
+    if (success) {
+      return <Button label="DONE" onPress={onPressDone} />;
+    }
+
+    if (!trimmedTitle) {
+      return <Button label="SUBMIT" disabled />;
+    }
+
+    return <Button label="SUBMIT" onPress={onPressSubmit} loading={loading} />;
+  };
+
   return (
     <SafeAreaView style={containerStyle}>
       <View style={cardContainerStyle}>
@@ -62,11 +76,7 @@ const EditSection = ({navigation, route}) => {
       </View>
 
       <View style={buttonContainerStyle}>
-        {success ? (
-          <Button label="DONE" onPress={onPressDone} />
-        ) : (
-          <Button label="SUBMIT" onPress={onPressSubmit} loading={loading} />
-        )}
+        <RenderSubmitButton />
       </View>
     </SafeAreaView>
   );
