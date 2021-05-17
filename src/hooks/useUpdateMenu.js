@@ -153,7 +153,7 @@ const useUpdateMenu = () => {
     const menuCopy = menu && Array.isArray(menu) ? [...menu] : [];
 
     const updatedMenu = menuCopy.filter(
-      index => index !== selectedMenuSectionIndex,
+      (element, index) => index !== selectedMenuSectionIndex,
     );
 
     const isValid = validateMenu(updatedMenu);
@@ -168,6 +168,7 @@ const useUpdateMenu = () => {
       setSuccess(true);
     } catch (error) {
       setLoading(false);
+      console.log(error);
     }
 
     setLoading(false);
