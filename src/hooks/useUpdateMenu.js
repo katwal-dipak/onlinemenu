@@ -148,6 +148,31 @@ const useUpdateMenu = () => {
     setLoading(false);
   };
 
+  const onRemoveMenuSection = async () => {
+    setLoading(true);
+    const menuCopy = menu && Array.isArray(menu) ? [...menu] : [];
+
+    const updatedMenu = menuCopy.filter(
+      index => index !== selectedMenuSectionIndex,
+    );
+
+    const isValid = validateMenu(updatedMenu);
+    if (!isValid) {
+      setLoading(false);
+      return;
+    }
+
+    try {
+      await userDocRef.update({menu: updatedMenu});
+      dispatch(setMenu(updatedMenu));
+      setSuccess(true);
+    } catch (error) {
+      setLoading(false);
+    }
+
+    setLoading(false);
+  };
+
   return {
     loading,
     success,
@@ -155,6 +180,7 @@ const useUpdateMenu = () => {
     onUpdateMenuSection,
     onAddNewMenuItem,
     onUpdateMenuItem,
+    onRemoveMenuSection,
   };
 };
 

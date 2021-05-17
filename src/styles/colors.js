@@ -41,4 +41,5 @@ export const Components = {
   Icon: Colors.Black.tint50Percent,
   HOME_BG: Colors.Black.tint50Percent,
   ACTIVITY_INDICATOR: Colors.Black.tint50Percent,
+  Warning: '#f55c47',
 };
