@@ -117,8 +117,8 @@ const useUpdateMenu = () => {
         let newMenuItems =
           menuItems && Array.isArray(menuItems) ? [...menuItems] : [];
 
-        newMenuItems = newMenuItems.map((element, index) => {
-          if (index === selectedMenuItemIndex) {
+        newMenuItems = newMenuItems.map((element, menuItemIndex) => {
+          if (menuItemIndex === selectedMenuItemIndex) {
             return updatedMenuItem;
           }
 
