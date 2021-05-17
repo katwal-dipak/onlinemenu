@@ -27,19 +27,23 @@ const EditMenuItem = ({navigation, route}) => {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity
-          onPress={() => {
-            onRemoveMenuItem();
-          }}>
+          onPress={
+            loading || success
+              ? () => {}
+              : () => {
+                  onRemoveMenuItem();
+                }
+          }>
           <Ionicons
             name="trash-bin-outline"
             size={25}
-            color={Components.Warning}
+            color={success || loading ? Components.Text.H3 : Components.Warning}
             style={{paddingHorizontal: 10}}
           />
         </TouchableOpacity>
       ),
     });
-  }, []);
+  }, [loading, success]);
 
   useEffect(() => {
     const {title, description, active, price} = item || {};
