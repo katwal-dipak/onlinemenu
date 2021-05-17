@@ -168,7 +168,6 @@ const useUpdateMenu = () => {
       setSuccess(true);
     } catch (error) {
       setLoading(false);
-      console.log(error);
     }
 
     setLoading(false);
@@ -198,18 +197,16 @@ const useUpdateMenu = () => {
     const isValid = validateMenu(updatedMenu);
     if (!isValid) {
       setLoading(false);
-      console.log('OMG invalid');
+
       return;
     }
 
     try {
       await userDocRef.update({menu: updatedMenu});
       dispatch(setMenu(updatedMenu));
-      console.log('success');
       setSuccess(true);
     } catch (error) {
       setLoading(false);
-      console.log(error);
     }
 
     setLoading(false);
