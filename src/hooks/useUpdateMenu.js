@@ -15,10 +15,24 @@ const useUpdateMenu = () => {
   const {uid} = firebaseAuthUserObj || {};
   const userDocRef = FIRESTORE_COLLECTION.USERS.doc(uid);
 
+  const validateMenu = menuArray => {
+    if (menuArray && Array.isArray(menuArray) && menuArray.length > 0) {
+      return true;
+    }
+
+    return false;
+  };
+
   const onAddNewMenuSection = async item => {
     setLoading(true);
     const newMenu = menu && Array.isArray(menu) ? [...menu] : [];
     newMenu.push(item);
+
+    const isValid = validateMenu(newMenu);
+    if (!isValid) {
+      setLoading(false);
+      return;
+    }
 
     try {
       await userDocRef.update({menu: newMenu});
@@ -42,6 +56,12 @@ const useUpdateMenu = () => {
 
       return item;
     });
+
+    const isValid = validateMenu(updatedMenu);
+    if (!isValid) {
+      setLoading(false);
+      return;
+    }
 
     try {
       await userDocRef.update({menu: updatedMenu});
@@ -69,6 +89,12 @@ const useUpdateMenu = () => {
 
       return item;
     });
+
+    const isValid = validateMenu(updatedMenu);
+    if (!isValid) {
+      setLoading(false);
+      return;
+    }
 
     try {
       await userDocRef.update({menu: updatedMenu});
@@ -104,6 +130,12 @@ const useUpdateMenu = () => {
 
       return item;
     });
+
+    const isValid = validateMenu(updatedMenu);
+    if (!isValid) {
+      setLoading(false);
+      return;
+    }
 
     try {
       await userDocRef.update({menu: updatedMenu});

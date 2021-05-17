@@ -40,11 +40,7 @@ const SubmitButton = ({navigation}) => {
   return success ? (
     <Button label="DONE" onPress={onPressDone} />
   ) : (
-    <Button
-      loading={loading}
-      disabled={loading ? true : false}
-      onPress={onPressSubmit}
-    />
+    <Button loading={loading} onPress={onPressSubmit} />
   );
 };
 
