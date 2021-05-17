@@ -1,14 +1,12 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {View, Image, TouchableHighlight} from 'react-native';
+import React from 'react';
+import {Image, TouchableHighlight} from 'react-native';
 import {Surface} from 'react-native-paper';
-
 import {styles} from './styles';
-import {Components} from '../../styles/colors';
 
 const {containerStyle, imageStyle} = styles;
 
-const MenuCard = ({title, imageURL, onPress}) => {
+const MenuCard = ({imageURL, onPress}) => {
   return (
     <TouchableHighlight onPress={onPress} underlayColor="transparent">
       <Surface style={containerStyle}>
@@ -26,13 +24,11 @@ const MenuCard = ({title, imageURL, onPress}) => {
 };
 
 MenuCard.propTypes = {
-  title: PropTypes.string,
   imageURL: PropTypes.string,
   onPress: PropTypes.func,
 };
 
 MenuCard.defaultProps = {
-  title: '',
   imageURL: null,
   onPress: () => {},
 };

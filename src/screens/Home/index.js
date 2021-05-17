@@ -49,7 +49,7 @@ const Home = ({navigation}) => {
     const {imageURL} = item || {};
 
     return (
-      <View style={{alignSelf: 'center', marginTop: 15}}>
+      <View style={{alignSelf: 'center', marginBottom: 15}}>
         <MenuCard
           imageURL={imageURL}
           onPress={() => {
@@ -78,7 +78,7 @@ const Home = ({navigation}) => {
         }
         style={{
           flex: 1,
-          marginBottom: 10,
+          marginVertical: 20,
         }}
         showsVerticalScrollIndicator={false}
         data={templates || []}
