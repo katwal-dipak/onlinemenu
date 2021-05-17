@@ -174,6 +174,47 @@ const useUpdateMenu = () => {
     setLoading(false);
   };
 
+  const onRemoveMenuItem = async () => {
+    setLoading(true);
+    const menuCopy = menu && Array.isArray(menu) ? [...menu] : [];
+
+    const updatedMenu = menuCopy.map((item, index) => {
+      if (index === selectedMenuSectionIndex) {
+        const {data: menuItems} = item || {};
+
+        let newMenuItems =
+          menuItems && Array.isArray(menuItems) ? [...menuItems] : [];
+
+        newMenuItems = newMenuItems.filter(
+          (element, menuItemIndex) => menuItemIndex !== selectedMenuItemIndex,
+        );
+
+        return {...item, data: newMenuItems};
+      }
+
+      return item;
+    });
+
+    const isValid = validateMenu(updatedMenu);
+    if (!isValid) {
+      setLoading(false);
+      console.log('OMG invalid');
+      return;
+    }
+
+    try {
+      await userDocRef.update({menu: updatedMenu});
+      dispatch(setMenu(updatedMenu));
+      console.log('success');
+      setSuccess(true);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+
+    setLoading(false);
+  };
+
   return {
     loading,
     success,
@@ -182,6 +223,7 @@ const useUpdateMenu = () => {
     onAddNewMenuItem,
     onUpdateMenuItem,
     onRemoveMenuSection,
+    onRemoveMenuItem,
   };
 };
 
