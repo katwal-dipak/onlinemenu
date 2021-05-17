@@ -117,8 +117,8 @@ const useUpdateMenu = () => {
         let newMenuItems =
           menuItems && Array.isArray(menuItems) ? [...menuItems] : [];
 
-        newMenuItems = newMenuItems.map((element, index) => {
-          if (index === selectedMenuItemIndex) {
+        newMenuItems = newMenuItems.map((element, menuItemIndex) => {
+          if (menuItemIndex === selectedMenuItemIndex) {
             return updatedMenuItem;
           }
 
@@ -148,6 +148,70 @@ const useUpdateMenu = () => {
     setLoading(false);
   };
 
+  const onRemoveMenuSection = async () => {
+    setLoading(true);
+    const menuCopy = menu && Array.isArray(menu) ? [...menu] : [];
+
+    const updatedMenu = menuCopy.filter(
+      (element, index) => index !== selectedMenuSectionIndex,
+    );
+
+    const isValid = validateMenu(updatedMenu);
+    if (!isValid) {
+      setLoading(false);
+      return;
+    }
+
+    try {
+      await userDocRef.update({menu: updatedMenu});
+      dispatch(setMenu(updatedMenu));
+      setSuccess(true);
+    } catch (error) {
+      setLoading(false);
+    }
+
+    setLoading(false);
+  };
+
+  const onRemoveMenuItem = async () => {
+    setLoading(true);
+    const menuCopy = menu && Array.isArray(menu) ? [...menu] : [];
+
+    const updatedMenu = menuCopy.map((item, index) => {
+      if (index === selectedMenuSectionIndex) {
+        const {data: menuItems} = item || {};
+
+        let newMenuItems =
+          menuItems && Array.isArray(menuItems) ? [...menuItems] : [];
+
+        newMenuItems = newMenuItems.filter(
+          (element, menuItemIndex) => menuItemIndex !== selectedMenuItemIndex,
+        );
+
+        return {...item, data: newMenuItems};
+      }
+
+      return item;
+    });
+
+    const isValid = validateMenu(updatedMenu);
+    if (!isValid) {
+      setLoading(false);
+
+      return;
+    }
+
+    try {
+      await userDocRef.update({menu: updatedMenu});
+      dispatch(setMenu(updatedMenu));
+      setSuccess(true);
+    } catch (error) {
+      setLoading(false);
+    }
+
+    setLoading(false);
+  };
+
   return {
     loading,
     success,
@@ -155,6 +219,8 @@ const useUpdateMenu = () => {
     onUpdateMenuSection,
     onAddNewMenuItem,
     onUpdateMenuItem,
+    onRemoveMenuSection,
+    onRemoveMenuItem,
   };
 };
 

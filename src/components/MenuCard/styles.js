@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     height: CARD_HEIGHT,
     width: CARD_WIDTH,
     borderRadius: 5,
+    elevation: 3,
   },
   imageStyle: {
     width: '100%',

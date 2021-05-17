@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {SafeAreaView, View} from 'react-native';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {SafeAreaView, TouchableOpacity, View} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Button, CheckBoxLabel, TextInput} from '../../../components';
 import useUpdateMenu from '../../../hooks/useUpdateMenu';
+import {Components} from '../../../styles/colors';
 import {styles} from './styles';
 
 const {containerStyle, cardContainerStyle, buttonContainerStyle} = styles;
@@ -14,7 +16,34 @@ const EditMenuItem = ({navigation, route}) => {
   const [description, setDescription] = useState();
   const [active, setStatus] = useState();
 
-  const {loading, success, onUpdateMenuItem} = useUpdateMenu();
+  const {
+    loading,
+    success,
+    onUpdateMenuItem,
+    onRemoveMenuItem,
+  } = useUpdateMenu();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={
+            loading || success
+              ? () => {}
+              : () => {
+                  onRemoveMenuItem();
+                }
+          }>
+          <Ionicons
+            name="trash-bin-outline"
+            size={25}
+            color={success || loading ? Components.Text.H3 : Components.Warning}
+            style={{paddingHorizontal: 10}}
+          />
+        </TouchableOpacity>
+      ),
+    });
+  }, [loading, success]);
 
   useEffect(() => {
     const {title, description, active, price} = item || {};
