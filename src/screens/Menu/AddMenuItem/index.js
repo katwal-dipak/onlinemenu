@@ -58,14 +58,25 @@ const AddMenuItem = ({navigation}) => {
   return (
     <SafeAreaView style={containerStyle}>
       <View style={cardContainerStyle}>
-        <TextInput label="Title" value={title} onChangeText={onChangeTitle} />
+        <TextInput
+          label="Title"
+          value={title}
+          onChangeText={onChangeTitle}
+          maxLength={35}
+        />
         <View style={{marginTop: 10}} />
-        <TextInput label="Price" value={price} onChangeText={onChangePrice} />
+        <TextInput
+          label="Price"
+          value={price}
+          onChangeText={onChangePrice}
+          maxLength={7}
+        />
         <View style={{marginTop: 10}} />
         <TextInput
           label="Description"
           value={description}
           onChangeText={onChangeDescription}
+          maxLength={300}
         />
       </View>
       <View style={buttonContainerStyle}>

@@ -91,6 +91,7 @@ const EditSection = ({navigation, route}) => {
           placeholder="eg. Breakfast, Lunch, Dinner"
           value={title}
           onChangeText={onChangeTitle}
+          maxLength={25}
         />
         <View style={{marginTop: 10}} />
         <CheckBoxLabel

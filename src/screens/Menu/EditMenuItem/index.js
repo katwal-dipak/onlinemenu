@@ -101,9 +101,19 @@ const EditMenuItem = ({navigation, route}) => {
   return (
     <SafeAreaView style={containerStyle}>
       <View style={cardContainerStyle}>
-        <TextInput label="Title" value={title} onChangeText={onChangeTitle} />
+        <TextInput
+          label="Title"
+          value={title}
+          onChangeText={onChangeTitle}
+          maxLength={35}
+        />
         <View style={{marginTop: 10}} />
-        <TextInput label="Price" value={price} onChangeText={onChangePrice} />
+        <TextInput
+          label="Price"
+          value={price}
+          onChangeText={onChangePrice}
+          maxLength={7}
+        />
         <View style={{marginTop: 10}} />
         <TextInput
           label="Description"
@@ -111,6 +121,7 @@ const EditMenuItem = ({navigation, route}) => {
           onChangeText={onChangeDescription}
           multiline
           numberOfLines={8}
+          maxLength={300}
         />
         <View style={{marginTop: 10}} />
         <CheckBoxLabel
