@@ -11,6 +11,7 @@ const TextInput = ({
   placeholder,
   multiline,
   numberOfLines,
+  maxLength,
 }) => {
   return (
     <MaterialTextInput
@@ -36,6 +37,7 @@ const TextInput = ({
       autoCapitalize="none"
       multiline={multiline}
       numberOfLines={numberOfLines}
+      maxLength={maxLength}
     />
   );
 };
@@ -47,6 +49,7 @@ TextInput.propTypes = {
   onChangeText: PropTypes.func,
   multiline: PropTypes.bool,
   numberOfLines: PropTypes.number,
+  maxLength: PropTypes.number,
 };
 
 TextInput.defaultProps = {
@@ -56,6 +59,7 @@ TextInput.defaultProps = {
   onChangeText: () => {},
   multiline: false,
   numberOfLines: 1,
+  maxLength: 500,
 };
 
 export default TextInput;

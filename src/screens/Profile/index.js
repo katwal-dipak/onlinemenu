@@ -52,6 +52,7 @@ const Profile = ({navigation}) => {
               placeholder="Business name"
               value={name}
               onChangeText={onChangeName}
+              maxLength={50}
             />
             <Spacer />
             <TextInput
@@ -59,6 +60,7 @@ const Profile = ({navigation}) => {
               placeholder="Enter full address"
               value={address}
               onChangeYoutubeURL={onChangeAddress}
+              maxLength={200}
             />
           </View>
 
@@ -69,18 +71,21 @@ const Profile = ({navigation}) => {
               label="Email"
               value={email}
               onChangeText={onChangeEmail}
+              maxLength={100}
             />
             <Spacer />
             <TextInput
               label="Phone Number 1"
               value={phone1}
               onChangeText={onChangePhone1}
+              maxLength={15}
             />
             <Spacer />
             <TextInput
               label="Phone Number 2"
               value={phone2}
               onChangeText={onChangePhone2}
+              maxLength={15}
             />
           </View>
 
@@ -95,6 +100,7 @@ const Profile = ({navigation}) => {
               onChangeText={onChangeFacebookURL}
               multiline
               numberOfLines={3}
+              maxLength={250}
             />
             <Spacer />
             <TextInput
@@ -104,6 +110,7 @@ const Profile = ({navigation}) => {
               onChangeText={onChangeInstagramURL}
               multiline
               numberOfLines={3}
+              maxLength={250}
             />
             <Spacer />
             <TextInput
@@ -112,6 +119,7 @@ const Profile = ({navigation}) => {
               onChangeText={onChangeTwitterURL}
               multiline
               numberOfLines={3}
+              maxLength={250}
             />
             <Spacer />
             <TextInput
@@ -121,6 +129,7 @@ const Profile = ({navigation}) => {
               onChangeText={onChangeYoutubeURL}
               multiline
               numberOfLines={3}
+              maxLength={250}
             />
           </View>
         </ScrollView>
