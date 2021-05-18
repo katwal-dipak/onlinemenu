@@ -40,7 +40,12 @@ const AddSection = ({navigation}) => {
   return (
     <SafeAreaView style={containerStyle}>
       <View style={cardContainerStyle}>
-        <TextInput label="Title" value={title} onChangeText={onChangeTitle} />
+        <TextInput
+          label="Title"
+          value={title}
+          onChangeText={onChangeTitle}
+          maxLength={25}
+        />
         <View style={{marginTop: 10}} />
       </View>
       <View style={buttonContainerStyle}>
