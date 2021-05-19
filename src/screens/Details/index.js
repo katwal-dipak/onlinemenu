@@ -16,14 +16,14 @@ const {
 } = styles;
 
 const Details = ({item, visible, toggle}) => {
-  const {id, price, imageURL, plan} = item || {};
+  const {id, price, imageURL, plan, previewURL} = item || {};
   const {themeId} = useSelector(state => state.profile);
   const {loading, onApplyTheme} = useApplyTheme();
 
   const isActiveTheme = id === themeId;
 
   const onPressPreview = () => {
-    const URL = 'https://onlinemenu.today/template2';
+    const URL = previewURL;
 
     Linking.canOpenURL(URL).then(supported => {
       if (supported) {
