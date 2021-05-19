@@ -21,6 +21,12 @@ const Button = ({
   type,
   color,
 }) => {
+  let loadingColor = Components.Background.core;
+
+  if (type === 'outline') {
+    loadingColor = Theme.PrimaryColor;
+  }
+
   return (
     <RNEButton
       type={type}
@@ -42,7 +48,7 @@ const Button = ({
       containerStyle={containerStyle}
       loading={loading}
       loadingStyle={{marginVertical: 7}}
-      loadingProps={{color: Components.Background.core}}
+      loadingProps={{color: loadingColor}}
     />
   );
 };

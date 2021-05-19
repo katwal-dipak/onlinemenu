@@ -18,13 +18,11 @@ const Settings = ({navigation}) => {
   const {firebaseAuthUserObj} = useSelector(state => state.user);
   const {uid} = firebaseAuthUserObj || {};
 
-  const {loading, onPressLogout} = useAuthentication();
+  const {loading, onPressLogout, onPressLogin} = useAuthentication();
 
   const Profile = () => {
     return <Header navigation={navigation} />;
   };
-
-  const onPressRowItem = route_name => {};
 
   const onPressShare = () => {
     const shareOptions = {
@@ -80,29 +78,20 @@ const Settings = ({navigation}) => {
       <View style={{margin: 0}}>
         <RowItem
           label="Profile"
-          onPress={() => {
-            navigation.navigate('profile');
-          }}
+          onPress={uid ? () => navigation.navigate('profile') : onPressLogin}
         />
         <RowDivider />
         <RowItem
           label="Menu"
-          onPress={() => {
-            navigation.navigate('menu');
-          }}
+          onPress={uid ? () => navigation.navigate('menu') : onPressLogin}
         />
-
-        {uid ? (
-          <View>
-            <RowDivider />
-            <RowItem
-              label="QR Code"
-              onPress={() => navigation.navigate('download')}
-            />
-          </View>
-        ) : (
-          <View />
-        )}
+        <View>
+          <RowDivider />
+          <RowItem
+            label="QR Code"
+            onPress={uid ? () => navigation.navigate('download') : onPressLogin}
+          />
+        </View>
         <RowDivider />
         <RowItem label="Share" onPress={onPressShare} />
         <RowDivider />

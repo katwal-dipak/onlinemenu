@@ -1,9 +1,19 @@
-import React from 'react';
-import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+import React, {useLayoutEffect} from 'react';
+import {
+  Linking,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
 import {ActivityIndicator, TextInput} from '../../components';
 import {styles} from './styles';
 import SubmitButton from './SubmitButton';
 import useProfileForm from './useProfileForm';
+import {Components} from '../../styles/colors';
 
 const {
   containerStyle,
@@ -14,6 +24,8 @@ const {
 } = styles;
 
 const Profile = ({navigation}) => {
+  const {firebaseAuthUserObj} = useSelector(state => state.user);
+
   const {
     loading,
     name,
@@ -35,6 +47,33 @@ const Profile = ({navigation}) => {
     onChangeTwitterURL,
     onChangeYoutubeURL,
   } = useProfileForm();
+
+  const {uid} = firebaseAuthUserObj || {};
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={onPressPreviewButton}>
+          <Ionicons
+            name="expand-outline"
+            size={25}
+            color={Components.Button}
+            style={{paddingHorizontal: 10}}
+          />
+        </TouchableOpacity>
+      ),
+    });
+  }, []);
+
+  const onPressPreviewButton = () => {
+    const menuURL = `http://onlinemenu.today/menu/${uid}`;
+
+    Linking.canOpenURL(menuURL).then(supported => {
+      if (supported) {
+        Linking.openURL(menuURL);
+      }
+    });
+  };
 
   const Spacer = () => <View style={{marginTop: 10}} />;
 
