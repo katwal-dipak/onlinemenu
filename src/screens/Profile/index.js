@@ -13,6 +13,7 @@ import {ActivityIndicator, TextInput} from '../../components';
 import {styles} from './styles';
 import SubmitButton from './SubmitButton';
 import useProfileForm from './useProfileForm';
+import {Components} from '../../styles/colors';
 
 const {
   containerStyle,
