@@ -92,6 +92,7 @@ const Home = ({navigation}) => {
         item={selectedItem}
         visible={isDetailsVisible}
         toggle={toggleDetailsView}
+        navigation={navigation}
       />
     </View>
   );

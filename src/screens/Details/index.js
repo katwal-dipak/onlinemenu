@@ -15,15 +15,17 @@ const {
   previewTextStyle,
 } = styles;
 
-const Details = ({item, visible, toggle}) => {
-  const {id, price, imageURL, plan} = item || {};
+const Details = ({item, visible, toggle, navigation}) => {
+  const {id, price, imageURL, plan, previewURL} = item || {};
   const {themeId} = useSelector(state => state.profile);
+  const {firebaseAuthUserObj} = useSelector(state => state.user);
   const {loading, onApplyTheme} = useApplyTheme();
 
+  const {uid} = firebaseAuthUserObj || {};
   const isActiveTheme = id === themeId;
 
   const onPressPreview = () => {
-    const URL = 'https://onlinemenu.today/template2';
+    const URL = previewURL;
 
     Linking.canOpenURL(URL).then(supported => {
       if (supported) {
@@ -44,6 +46,39 @@ const Details = ({item, visible, toggle}) => {
 
   const onPressApplyTheme = () => {
     onApplyTheme(id);
+  };
+
+  const onPressLoginToApply = () => {
+    toggle();
+    navigation.navigate('settings');
+  };
+
+  const RenderButton = () => {
+    if (!uid) {
+      return (
+        <Button
+          label={'LOGIN TO APPLY THEME'}
+          containerStyle={{
+            paddingHorizontal: 15,
+            flex: 1,
+          }}
+          onPress={onPressLoginToApply}
+        />
+      );
+    }
+
+    return (
+      <Button
+        label={isActiveTheme ? 'CURRENTLY ACTIVE' : 'APPLY THEME'}
+        containerStyle={{
+          paddingHorizontal: 15,
+          flex: 1,
+        }}
+        onPress={isActiveTheme ? () => {} : onPressApplyTheme}
+        loading={loading}
+        color={isActiveTheme ? Theme.SecondaryColor : null}
+      />
+    );
   };
 
   return (
@@ -68,16 +103,7 @@ const Details = ({item, visible, toggle}) => {
             <Text style={previewTextStyle}>{plan > 1 ? `Per Month` : ''}</Text>
           </View>
           <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
-            <Button
-              label={isActiveTheme ? 'CURRENTLY ACTIVE' : 'APPLY THEME'}
-              containerStyle={{
-                paddingHorizontal: 15,
-                flex: 1,
-              }}
-              onPress={isActiveTheme ? () => {} : onPressApplyTheme}
-              loading={loading}
-              color={isActiveTheme ? Theme.SecondaryColor : null}
-            />
+            <RenderButton />
             <View style={{alignItems: 'center', paddingHorizontal: 15}}>
               <Ionicons
                 name="expand-outline"
