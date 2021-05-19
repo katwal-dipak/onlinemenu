@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {
   FlatList,
+  Linking,
   SafeAreaView,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useDispatch, useSelector} from 'react-redux';
 import {ActivityIndicator, Button, Divider} from '../../components';
 import useFetchMenu from '../../hooks/useFetchMenu';
 import {setSelectedMenuSectionIndex} from '../../store/actions/menu';
+import {Components} from '../../styles/colors';
 import {styles} from './styles';
 
 const {
@@ -27,7 +30,35 @@ const {
 const Menu = ({navigation}) => {
   const dispatch = useDispatch();
   const {menu} = useSelector(state => state.menu);
+  const {firebaseAuthUserObj} = useSelector(state => state.user);
   const {loading} = useFetchMenu();
+
+  const {uid} = firebaseAuthUserObj || {};
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={onPressPreviewButton}>
+          <Ionicons
+            name="expand-outline"
+            size={25}
+            color={Components.Button}
+            style={{paddingHorizontal: 10}}
+          />
+        </TouchableOpacity>
+      ),
+    });
+  }, []);
+
+  const onPressPreviewButton = () => {
+    const menuURL = `http://onlinemenu.today/menu/${uid}`;
+
+    Linking.canOpenURL(menuURL).then(supported => {
+      if (supported) {
+        Linking.openURL(menuURL);
+      }
+    });
+  };
 
   const onPressCard = index => {
     navigation.navigate('menu_items');
