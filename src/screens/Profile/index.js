@@ -91,15 +91,15 @@ const Profile = ({navigation}) => {
               placeholder="Business name"
               value={name}
               onChangeText={onChangeName}
-              maxLength={50}
+              maxLength={40}
             />
             <Spacer />
             <TextInput
               label="Address"
               placeholder="Enter full address"
               value={address}
-              onChangeYoutubeURL={onChangeAddress}
-              maxLength={200}
+              onChangeText={onChangeAddress}
+              maxLength={150}
             />
           </View>
 
@@ -110,7 +110,7 @@ const Profile = ({navigation}) => {
               label="Email"
               value={email}
               onChangeText={onChangeEmail}
-              maxLength={100}
+              maxLength={40}
             />
             <Spacer />
             <TextInput

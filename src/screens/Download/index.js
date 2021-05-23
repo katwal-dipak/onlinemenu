@@ -9,6 +9,7 @@ import {
   Text,
   ToastAndroid,
   View,
+  Alert,
 } from 'react-native';
 import RNFS from 'react-native-fs';
 import QRCode from 'react-native-qrcode-svg';
@@ -33,6 +34,22 @@ const Download = () => {
 
   const saveQrToDisk = async () => {
     if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
+      Alert.alert(
+        'Online Menu',
+        'Please enable storage permission in your phone settings to download the QR Code',
+        [
+          {
+            text: 'OK',
+            onPress: () => {},
+            style: 'cancel',
+          },
+        ],
+      );
+
+      return;
+    }
+
+    if (Platform.OS === 'ios') {
       return;
     }
 
