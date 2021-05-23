@@ -1,6 +1,7 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {SafeAreaView, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
 import {Button, CheckBoxLabel, TextInput} from '../../../components';
 import useUpdateMenu from '../../../hooks/useUpdateMenu';
 import {Components} from '../../../styles/colors';
@@ -10,6 +11,7 @@ const {containerStyle, cardContainerStyle, buttonContainerStyle} = styles;
 
 const EditSection = ({navigation, route}) => {
   const {item} = route.params || {};
+  const {menu} = useSelector(state => state.menu);
 
   const [title, setTitle] = useState();
   const [active, setStatus] = useState();
@@ -21,27 +23,34 @@ const EditSection = ({navigation, route}) => {
     onRemoveMenuSection,
   } = useUpdateMenu();
 
+  const menuSectionsLength = menu && Array.isArray(menu) && menu.length;
+
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity
-          onPress={
-            loading || success
-              ? () => {}
-              : () => {
-                  onRemoveMenuSection();
-                }
-          }>
-          <Ionicons
-            name="trash-bin-outline"
-            size={25}
-            color={success || loading ? Components.Text.H3 : Components.Warning}
-            style={{paddingHorizontal: 10}}
-          />
-        </TouchableOpacity>
-      ),
+      headerRight: () =>
+        menuSectionsLength > 1 ? (
+          <TouchableOpacity
+            onPress={
+              loading || success
+                ? () => {}
+                : () => {
+                    onRemoveMenuSection();
+                  }
+            }>
+            <Ionicons
+              name="trash-bin-outline"
+              size={25}
+              color={
+                success || loading ? Components.Text.H3 : Components.Warning
+              }
+              style={{paddingHorizontal: 10}}
+            />
+          </TouchableOpacity>
+        ) : (
+          <View />
+        ),
     });
-  }, [loading, success]);
+  }, [loading, success, menuItemLength]);
 
   useEffect(() => {
     const {title, active} = item || {};

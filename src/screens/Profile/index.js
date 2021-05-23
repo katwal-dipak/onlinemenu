@@ -100,6 +100,8 @@ const Profile = ({navigation}) => {
               value={address}
               onChangeText={onChangeAddress}
               maxLength={150}
+              multiline
+              numberOfLines={2}
             />
           </View>
 
