@@ -9,10 +9,9 @@ import {TextStyles} from '../../styles/text';
 import Header from './Header';
 import RowItem from './RowItem';
 
-const GOOGLE_PLAY_URL =
-  'https://play.google.com/store/apps/details?id=app.sangalo.android';
+const GOOGLE_PLAY_URL = 'http://onlinemenu.today/';
 
-const APP_STORE_URL = 'https://apps.apple.com/us/app/sangalo/id1550242573';
+const APP_STORE_URL = 'http://onlinemenu.today/';
 
 const Settings = ({navigation}) => {
   const {firebaseAuthUserObj} = useSelector(state => state.user);
