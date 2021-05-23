@@ -50,7 +50,7 @@ const EditSection = ({navigation, route}) => {
           <View />
         ),
     });
-  }, [loading, success, menuItemLength]);
+  }, [loading, success, menuSectionsLength]);
 
   useEffect(() => {
     const {title, active} = item || {};
