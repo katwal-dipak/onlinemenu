@@ -112,7 +112,7 @@ const EditMenuItem = ({navigation, route}) => {
           label="Price"
           value={price}
           onChangeText={onChangePrice}
-          maxLength={7}
+          maxLength={5}
         />
         <View style={{marginTop: 10}} />
         <TextInput
