@@ -64,7 +64,13 @@ const MenuItems = ({navigation}) => {
           }}>
           <Text style={itemsCountTextStyle}>{price}</Text>
           <Text style={borderStyle}>|</Text>
-          <TouchableOpacity onPress={() => onPressEditMenuItem(index, item)}>
+          <TouchableOpacity
+            onPress={() => onPressEditMenuItem(index, item)}
+            style={{
+              paddingVertical: 5,
+              flex: 0.5,
+              alignItems: 'flex-end',
+            }}>
             <Text style={editButtonTextStyle}>EDIT</Text>
           </TouchableOpacity>
         </View>
