@@ -1,10 +1,17 @@
-import React, {useLayoutEffect, useState} from 'react';
-import {FlatList, RefreshControl, TouchableOpacity, View} from 'react-native';
+import React, {useLayoutEffect, useState, useEffect} from 'react';
+import {
+  FlatList,
+  RefreshControl,
+  TouchableOpacity,
+  View,
+  StatusBar,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ActivityIndicator, MenuCard} from '../../components';
 import useFetchTemplates from '../../hooks/useFetchTemplates';
 import {Components} from '../../styles/colors';
 import Details from '../Details';
+import SplashScreen from 'react-native-splash-screen';
 
 const Home = ({navigation}) => {
   const [isDetailsVisible, setDetailsVisibility] = useState(false);
@@ -20,6 +27,10 @@ const Home = ({navigation}) => {
     onRetry,
     onEndReached,
   } = useFetchTemplates();
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -72,6 +83,7 @@ const Home = ({navigation}) => {
     <ActivityIndicator />
   ) : (
     <View style={{flex: 1, backgroundColor: Components.Background.core}}>
+      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
       <FlatList
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
