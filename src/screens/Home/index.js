@@ -5,6 +5,7 @@ import {ActivityIndicator, MenuCard} from '../../components';
 import useFetchTemplates from '../../hooks/useFetchTemplates';
 import {Components} from '../../styles/colors';
 import Details from '../Details';
+import SplashScreen from 'react-native-splash-screen';
 
 const Home = ({navigation}) => {
   const [isDetailsVisible, setDetailsVisibility] = useState(false);
@@ -20,6 +21,10 @@ const Home = ({navigation}) => {
     onRetry,
     onEndReached,
   } = useFetchTemplates();
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
