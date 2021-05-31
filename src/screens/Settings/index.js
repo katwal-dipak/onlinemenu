@@ -9,7 +9,8 @@ import {TextStyles} from '../../styles/text';
 import Header from './Header';
 import RowItem from './RowItem';
 
-const GOOGLE_PLAY_URL = 'http://onlinemenu.today/';
+const GOOGLE_PLAY_URL =
+  'https://play.google.com/store/apps/details?id=app.onlinemenu.android';
 
 const APP_STORE_URL = 'http://onlinemenu.today/';
 
