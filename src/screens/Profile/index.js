@@ -119,14 +119,14 @@ const Profile = ({navigation}) => {
               label="Phone Number 1"
               value={phone1}
               onChangeText={onChangePhone1}
-              maxLength={15}
+              maxLength={20}
             />
             <Spacer />
             <TextInput
               label="Phone Number 2"
               value={phone2}
               onChangeText={onChangePhone2}
-              maxLength={15}
+              maxLength={20}
             />
           </View>
 
